@@ -1,12 +1,6 @@
-# freshshell.com
-#
-# Examples:
-#
-#   fresh twe4ked/dotfiles shell/functions/\*
-#   fresh jasoncodes/dotfiles shell/aliases/rails.sh
-#   fresh jasoncodes/dotfiles config/tmux.conf --file
-#
-# See http://freshshell.com/readme for documentation.
+# vim: set ft=sh:
 
 fresh freshshell/fresh bin/fresh --bin
 
+fresh freshshell/fresh contrib/source-build.sh --file=~/.bash_profile
+fresh freshshell/fresh contrib/source-build.sh --file=~/.bashrc

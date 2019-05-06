@@ -9,15 +9,18 @@ fi
 # Install packages from official repositories
 
 BASE="base base-devel"
-DEV="docker git neovim nodejs"
+DEV="docker git neovim nodejs tmux vagrant virtualbox"
 GNOME="baobab evince file-roller gdm gnome-backgrounds gnome-boxes gnome-calculator gnome-characters gnome-clocks gnome-color-manager gnome-control-center gnome-disk-utility gnome-font-viewer gnome-getting-started-docs gnome-keyring gnome-logs gnome-menus gnome-remote-desktop gnome-screenshot gnome-session gnome-settings-daemon gnome-shell gnome-shell-extensions gnome-system-monitor gnome-terminal gnome-themes-extra gnome-user-docs gvfs gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-smb mousetweaks mutter nautilus networkmanager rygel simple-scan sushi tracker tracker-miners xdg-user-dirs-gtk yelp"
-GNOMEEXTRA="dconf-editor gnome-nettool gnome-tweaks gnome-usage"
-export ALLPACKAGES="$BASE $DEV $GNOME $GNOMEEXTRA $DESKTOPAPPS"
+GNOMEEXTRA="dconf-editor gnome-nettool gnome-tweaks gnome-usage libsecret seahorse"
+DESKTOPAPPS="keepass"
+OTHERS="xclip xdotool xsel"
+export ALLPACKAGES="$BASE $DEV $GNOME $GNOMEEXTRA $DESKTOPAPPS $OTHERS"
 
-"${PACMANCMD[@]}" -S --needed $ALLPACKAGES || echo "This script must be run as either root or a sudoer to install pacman packages!"
+"${PACMANCMD[@]}" -Syuq
+"${PACMANCMD[@]}" -Sq --needed $ALLPACKAGES || echo "This script must be run as either root or a sudoer to install pacman packages!"
 
 # Install packages from AUR
-AURPACKAGES="google-chrome android-studio discord spotify unity-editor"
+AURPACKAGES="android-studio debtap discord google-chrome spotify synology-drive unityhub"
 if [ -x /usr/bin/yay ]; then
   echo "Yay already installed!"
 else
@@ -28,4 +31,11 @@ else
   cd ..
   rm -rf yay
 fi
-yay -S --needed $AURPACKAGES
+yay -Sq --needed $AURPACKAGES
+
+if ! pacman -Qqs "chat"; then
+  chatname='Chat_1.0.1-40_amd64.deb'
+  chaturl="https://global.download.synology.com/download/Tools/ChatClient/1.0.1-40/Ubuntu/x86_64/Chat_1.0.1-40_amd64.deb?model=DS1517&bays=5&dsm_version=6.2.2&build_number=24922"
+  curl "$chaturl" > "$chatname"
+  debtap "$chatname"
+fi

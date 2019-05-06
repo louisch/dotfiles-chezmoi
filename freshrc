@@ -1,12 +1,14 @@
-# freshshell.com
-#
-# Examples:
-#
-#   fresh twe4ked/dotfiles shell/functions/\*
-#   fresh jasoncodes/dotfiles shell/aliases/rails.sh
-#   fresh jasoncodes/dotfiles config/tmux.conf --file
-#
-# See http://freshshell.com/readme for documentation.
+NEOVIMDIR=~/.config/nvim
+
+cwd=$PWD
 
 fresh freshshell/fresh bin/fresh --bin
 
+git clone "https://github.com/louisch/dotnvim.git" "$NEOVIMDIR"
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+sh ./installer.sh "$NEOVIMDIR"/dein
+rm installer.sh  # we can remove the installation script afterwards
+nvim -c ':call dein#install() | :q'
+cd "$NEOVIMDIR"/dein/repos/github.com/Valloric/YouCompleteMe
+./install.py --all
+cd "$cwd"

@@ -16,6 +16,7 @@ else
   git pull
 fi
 echo "let nvimdir = \"$NEOVIMDIR\"" > "$NEOVIMDIR"/local.vim
+pip install --user --upgrade neovim
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 sh ./installer.sh "$NEOVIMDIR"/dein
 rm installer.sh  # we can remove the installation script afterwards

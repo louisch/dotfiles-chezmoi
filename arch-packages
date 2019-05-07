@@ -9,18 +9,18 @@ fi
 # Install packages from official repositories
 
 BASE="base base-devel"
-DEV="cmake docker git go jdk-openjdk mono neovim nodejs powerline python python-pip ruby rust tmux vagrant virtualbox"
+DEV="cmake docker docker-compose git go jdk-openjdk mono neovim nodejs powerline python python-pip python2 ruby rust tmux vagrant virtualbox"
 GNOME="baobab evince file-roller gdm gnome-backgrounds gnome-boxes gnome-calculator gnome-characters gnome-clocks gnome-color-manager gnome-control-center gnome-disk-utility gnome-font-viewer gnome-getting-started-docs gnome-keyring gnome-logs gnome-menus gnome-remote-desktop gnome-screenshot gnome-session gnome-settings-daemon gnome-shell gnome-shell-extensions gnome-system-monitor gnome-terminal gnome-themes-extra gnome-user-docs gvfs gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-smb mousetweaks mutter nautilus networkmanager rygel simple-scan sushi tracker tracker-miners xdg-user-dirs-gtk yelp"
 GNOMEEXTRA="dconf-editor gnome-nettool gnome-tweaks gnome-usage libsecret seahorse"
 DESKTOPAPPS="keepass"
-OTHERS="xclip xdotool xsel"
+OTHERS="ntp xclip xdotool xsel"
 export ALLPACKAGES="$BASE $DEV $GNOME $GNOMEEXTRA $DESKTOPAPPS $OTHERS"
 
 "${PACMANCMD[@]}" -Syuq
 "${PACMANCMD[@]}" -Sq --needed $ALLPACKAGES || echo "This script must be run as either root or a sudoer to install pacman packages!"
 
 # Install packages from AUR
-AURPACKAGES="android-studio debtap discord google-chrome powerline-fonts-git spotify synology-drive unityhub"
+AURPACKAGES="anaconda android-studio debtap discord google-chrome powerline-fonts-git spotify synology-drive unityhub"
 if [ -x /usr/bin/yay ]; then
   echo "Yay already installed!"
 else
@@ -39,3 +39,7 @@ if ! pacman -Qqs "chat"; then
   curl "$chaturl" > "$chatname"
   debtap "$chatname"
 fi
+
+# Activate software
+sudo systemctl enable docker.service
+sudo systemctl start docker.service

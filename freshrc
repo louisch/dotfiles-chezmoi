@@ -8,7 +8,6 @@ fresh freshshell/fresh bin/fresh --bin
 fresh gitconfig --file
 # TMUX
 # Save history to file
-fresh foobacca/dotfiles tmux/clipboard --file=~/tmux.conf
 fresh foobacca/dotfiles tmux/ctrl-a --file=~/tmux.conf
 fresh foobacca/dotfiles tmux/misc-bindings --file=~/tmux.conf
 fresh foobacca/dotfiles tmux/save-buffer-history --file=~/tmux.conf

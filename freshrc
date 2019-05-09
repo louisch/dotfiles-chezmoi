@@ -14,7 +14,14 @@ fresh foobacca/dotfiles tmux/vi --file=~/tmux.conf
 fresh foobacca/dotfiles tmux/misc-bindings --file=~/tmux.conf
 fresh tmux.conf --file
 
-# sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# Bash
+fresh bashrc --file
+# Zshrc
+if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+fi
+fresh zshrc --file
+
 #
 # if [[ ! -d "$NEOVIMDIR" ]]; then
 #   git clone "https://github.com/louisch/dotnvim.git" "$NEOVIMDIR"

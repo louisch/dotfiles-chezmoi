@@ -9,7 +9,7 @@ fi
 # Install packages from official repositories
 
 BASE="base base-devel"
-DEV="blender cmake docker docker-compose git git-lfs gimp go inkscape jdk-openjdk mono neovim nodejs powerline python python-pip python2 ruby rust tmux vagrant virtualbox"
+DEV="blender cmake docker docker-compose git git-lfs gimp go inkscape jdk-openjdk mono neovim nodejs powerline python python-pip python2 ruby rust tmux vagrant virtualbox virtualbox-guest-iso virtualbox-guest-utils"
 GNOME="baobab evince file-roller gdm gnome-backgrounds gnome-boxes gnome-calculator gnome-characters gnome-clocks gnome-color-manager gnome-control-center gnome-disk-utility gnome-font-viewer gnome-getting-started-docs gnome-keyring gnome-logs gnome-menus gnome-remote-desktop gnome-screenshot gnome-session gnome-settings-daemon gnome-shell gnome-system-monitor gnome-terminal gnome-themes-extra gnome-user-docs gvfs gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-smb mousetweaks mutter nautilus networkmanager rygel simple-scan sushi tracker tracker-miners xdg-user-dirs-gtk yelp"
 GNOMEEXTRA="chrome-gnome-shell dconf-editor gnome-nettool gnome-tweaks gnome-usage libsecret seahorse"
 DESKTOPAPPS="keepass"

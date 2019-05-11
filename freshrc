@@ -5,6 +5,9 @@ cwd=$PWD
 # handles updating fresh
 fresh freshshell/fresh bin/fresh --bin
 # links your local ~/.dotfiles/gitconfig to ~/.gitconfig (you can change your local directory by setting $FRESH_LOCAL)
+if [[ -f "$HOME/.gitconfig" && ! -L "$HOME/.gitconfig" ]]; then
+    mv "$HOME/.gitconfig" "$HOME/.dotfiles/gitconfig"
+fi
 fresh gitconfig --file
 # TMUX
 # Save history to file

@@ -5,20 +5,39 @@ if [[ $EUID == 0 ]]; then
 else
   PACMANCMD=( sudo pacman )
 fi
+PACMANINSTALLFLAGS="-Sq --needed --noconfirm"
 
 # Install packages from official repositories
 
-BASE="base base-devel"
-DEV="blender cmake docker docker-compose git git-lfs gimp go inkscape jdk-openjdk mono neovim nodejs powerline python python-pip python2 ruby rust tmux vagrant virtualbox"
+# "${PACMANCMD[@]}" $PACMANINSTALLFLAGS reflector
+# sudo reflector -l 100 --sort rate --save /etc/pacman.d/mirrorlist
+
+# Uncomment if broadcom wireless driver is needed
+# "${PACMANCMD[@]}" $PACMANINSTALLFLAGS broadcom-wl-dkms
+# sudo modprobe wl
+# sudo echo "wl" >> /etc/modules-load.d/modprobe.conf
+
+# Uncomment if on Intel processor
+# "${PACMANCMD[@]}" $PACMANINSTALLFLAGS intel-ucode mesa lib32-mesa vulkan-intel
+# sudo grub-mkconfig -o /boot/grub/grub.cfg
+# echo "Remember to edit /etc/mkinitcpio.conf to enable KVM"
+
+BASE="base-devel"
+DEV="blender cmake docker docker-compose git git-lfs gimp go inkscape jdk-openjdk linux-headers mono neovim nodejs powerline python python-pip python2 ruby rust tmux vagrant virtualbox zsh"
 GNOME="baobab evince file-roller gdm gnome-backgrounds gnome-boxes gnome-calculator gnome-characters gnome-clocks gnome-color-manager gnome-control-center gnome-disk-utility gnome-font-viewer gnome-getting-started-docs gnome-keyring gnome-logs gnome-menus gnome-remote-desktop gnome-screenshot gnome-session gnome-settings-daemon gnome-shell gnome-shell-extensions gnome-system-monitor gnome-terminal gnome-themes-extra gnome-user-docs gvfs gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-smb mousetweaks mutter nautilus networkmanager rygel simple-scan sushi tracker tracker-miners xdg-user-dirs-gtk yelp"
 GNOMEEXTRA="dconf-editor gnome-nettool gnome-tweaks gnome-usage libsecret seahorse"
 DESKTOPAPPS="keepass"
 THEMING="adapta-gtk-theme gtk-engine-murrine noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-roboto"
-OTHERS="alsa-utils fcitx fcitx-googlepinyin fcitx-mozc ntp xclip xdotool xsel"
+OTHERS="alsa-utils chrome-gnome-shell ibus ibus-rime ibus-anthy ntp xclip xdotool xsel"
 export ALLPACKAGES="$BASE $DEV $GNOME $GNOMEEXTRA $DESKTOPAPPS $THEMING $OTHERS"
 
-"${PACMANCMD[@]}" -Syuq
-"${PACMANCMD[@]}" -Sq --needed $ALLPACKAGES || echo "This script must be run as either root or a sudoer to install pacman packages!"
+"${PACMANCMD[@]}" -Sq --noconfirm --needed $ALLPACKAGES || echo "This script must be run as either root or a sudoer to install pacman packages!"
+
+# Activate software
+sudo systemctl enable gdm.service
+sudo systemctl enable NetworkManager.service
+sudo systemctl start NetworkManager.service
+gsettings set org.gnome.desktop.interface gtk-theme Adapta-Eta
 
 # Install packages from AUR
 AURPACKAGES="anaconda android-studio debtap discord google-chrome powerline-fonts-git spotify synology-drive unityhub"
@@ -32,7 +51,7 @@ else
   cd ..
   rm -rf yay
 fi
-yay -Sq --needed $AURPACKAGES
+yay -Sq --needed --noconfirm $AURPACKAGES
 
 if ! pacman -Qqs "chat"; then
   chatname='Chat_1.0.1-40_amd64.deb'

@@ -32,7 +32,7 @@
 
   # Set your time zone.
   time.timeZone = "Asia/Hong_Kong";
-  
+
   ## PACKAGES
 
   system.autoUpgrade.enable = true;
@@ -74,6 +74,16 @@
     mpv
     spotify
     steam
+    # Themes
+    adapta-gtk-theme
+    adapta-kde-theme
+    # Tools
+    appimage-run
+    flatpak
+    xclip
+    xdotool
+    xsel
+    youtube-dl
     # Social
     discord
     hexchat
@@ -84,13 +94,9 @@
     # Others
     keepass
     libinput-gestures
-    youtube-dl
-    xclip
-    xdotool
-    xsel
     zsh
   ];
- 
+
   nixpkgs.config = {
     allowUnfree = true;
   };
@@ -102,8 +108,17 @@
 
   programs.zsh.enable = true;
 
+  fonts.fonts = with pkgs; [
+    inconsolata
+    liberation_ttf
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    roboto
+  ];
+
   # List services that you want to enable:
- 
+
   services = {
     # Enable the OpenSSH daemon.
     # openssh.enable = true;

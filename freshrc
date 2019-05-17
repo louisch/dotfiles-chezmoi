@@ -24,23 +24,3 @@ if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
 fresh zshrc --file
-
-#
-# if [[ ! -d "$NEOVIMDIR" ]]; then
-#   git clone "https://github.com/louisch/dotnvim.git" "$NEOVIMDIR"
-# else
-#   cd "$NEOVIMDIR"
-#   git pull
-# fi
-# echo "let nvimdir = \"$NEOVIMDIR\"" > "$NEOVIMDIR"/local.vim
-# pip install --user --upgrade neovim
-# curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-# sh ./installer.sh "$NEOVIMDIR"/dein
-# rm installer.sh  # we can remove the installation script afterwards
-# nvim -c ':call dein#install() | :q'
-# cd "$NEOVIMDIR"/dein/repos/github.com/Valloric/YouCompleteMe
-# ./install.py --all
-# cd "$cwd"
-
-# source "$DOTFILESDIR/zsh"
-# source "$DOTFILESDIR/neovim"

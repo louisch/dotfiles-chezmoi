@@ -1,15 +1,43 @@
+#!/bin/bash
+if [[ ! "$NEOVIMDIR" ]]; then
+  NEOVIMDIR=~/.config/nvim
+  echo "Setting NEOVIMDIR to $NEOVIMDIR"
+fi
+YOUCOMPLETEME=true
+YOUCOMPLETEMEFLAGS="--clang-completer --cs-completer --java-completer --ts-completer"
+
+echo ""
+echo "Pulling dotnvim from github..."
 if [[ ! -d "$NEOVIMDIR" ]]; then
   git clone "https://github.com/louisch/dotnvim.git" "$NEOVIMDIR"
 else
   cd "$NEOVIMDIR"
   git pull
 fi
-echo "let nvimdir = \"$NEOVIMDIR\"" > "$NEOVIMDIR"/local.vim
+
+if [[ ! -f "$NEOVIMDIR/local.vim" ]]; then
+  LOCALVIMCONTENTS="let nvimdir = \"$NEOVIMDIR\""
+  echo ""
+  echo "Creating local.vim file with contents: $LOCALVIMCONTENTS"
+  echo "$LOCALVIMCONTENTS" > "$NEOVIMDIR/local.vim"
+fi
+
+echo ""
+echo "Trying to Install Python to Neovim..."
 pip install --user --upgrade neovim
-curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-sh ./installer.sh "$NEOVIMDIR"/dein
-rm installer.sh  # we can remove the installation script afterwards
-nvim -c ':call dein#install() | :q'
-cd "$NEOVIMDIR"/dein/repos/github.com/Valloric/YouCompleteMe
-./install.py --all
+pip install --user --upgrade pynvim
+pip2 install --user --upgrade pynvim
+
+if [[ ! -d "$NEOVIMDIR/dein" ]]; then
+  echo ""
+  echo "Installing dein for the first time..."
+  curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+  sh ./installer.sh "$NEOVIMDIR/dein"
+  rm installer.sh  # we can remove the installation script afterwards
+  echo "Making sure dein packages are up to date..."
+  nvim -c ':call dein#install() | :q'
+  echo "Installing YouCompleteMe..."
+  cd "$NEOVIMDIR/dein/repos/github.com/Valloric/YouCompleteMe"
+  ./install.py "YOUCOMPLETEMEFLAGS"
+fi
 

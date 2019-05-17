@@ -1,3 +1,4 @@
+#!/bin/bash
 if [[ ! $SHELL == *zsh* ]]; then
   sudo chsh -s /usr/bin/zsh
 fi

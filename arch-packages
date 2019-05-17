@@ -9,7 +9,7 @@ fi
 # Install packages from official repositories
 
 BASE="base-devel"
-DEV="blender cmake docker docker-compose git git-lfs gimp inkscape jdk-openjdk mono neovim nodejs powerline python python-pip python2 ruby tmux vagrant virtualbox virtualbox-guest-iso virtualbox-guest-utils"
+DEV="blender cmake docker docker-compose git git-lfs gimp inkscape jdk-openjdk mono neovim python-neovim nodejs powerline python python-pip python2 ruby tmux vagrant virtualbox virtualbox-guest-iso virtualbox-guest-utils"
 GNOME=""
 GNOMEEXTRA=""
 # Uncomment to enable gnome
@@ -33,7 +33,7 @@ export ALLPACKAGES="$BASE $DEV $GNOME $GNOMEEXTRA $XFCE $XFCESUPPLEMENT $NETWORK
 AURDEV="anaconda android-studio unityhub"
 AURINTERNET="google-chrome discord synology-drive"
 AURENTERTAINMENT="spotify"
-AUROTHERS="debtap lightdm-slick-greeter nvm powerline-fonts-git"
+AUROTHERS="debtap lightdm-slick-greeter nvm powerline-fonts-git python2-neovim"
 AURPACKAGES="$AURDEV $AURINTERNET $AURENTERTAINMENT $AUROTHERS"
 if [ -x /usr/bin/yay ]; then
   echo "Yay already installed!"

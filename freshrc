@@ -25,8 +25,3 @@ fresh tmux.conf --file
 
 # Bash
 fresh bashrc --file
-# Zshrc
-if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-fi
-fresh zshrc --file

@@ -46,3 +46,4 @@ if [[ ! -d "$NEOVIMDIR/dein" ]]; then
   ./install.py "YOUCOMPLETEMEFLAGS"
 fi
 
+echo "Consider using :checkhealth to find further issues"

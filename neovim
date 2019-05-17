@@ -5,6 +5,9 @@ if [[ ! "$NEOVIMDIR" ]]; then
 fi
 YOUCOMPLETEME=true
 YOUCOMPLETEMEFLAGS="--clang-completer --cs-completer --java-completer --ts-completer"
+LOCALVIMCONTENTS="let nvimdir = \"$NEOVIMDIR\""
+# Use this one instead if on Arch Linux
+#LOCALVIMCONTENTS="let nvimdir = \"$NEOVIMDIR\"\nlet g:python_host_prog=/usr/bin/python2\nlet g:python3_host_prog=/usr/bin/python3"
 
 echo ""
 echo "Pulling dotnvim from github..."
@@ -16,17 +19,19 @@ else
 fi
 
 if [[ ! -f "$NEOVIMDIR/local.vim" ]]; then
-  LOCALVIMCONTENTS="let nvimdir = \"$NEOVIMDIR\""
   echo ""
   echo "Creating local.vim file with contents: $LOCALVIMCONTENTS"
   echo "$LOCALVIMCONTENTS" > "$NEOVIMDIR/local.vim"
 fi
 
 echo ""
-echo "Trying to Install Python to Neovim..."
-pip install --user --upgrade neovim
-pip install --user --upgrade pynvim
-pip2 install --user --upgrade pynvim
+echo "Checking for Python provider..."
+if [[ ! $(nvim --version | grep py) ]]; then
+  echo "Please install Python provider before proceeding"
+  exit -1
+fi
+echo "Trying to Install Node provider to Neovim..."
+npm install -g neovim
 
 if [[ ! -d "$NEOVIMDIR/dein" ]]; then
   echo ""

@@ -15,6 +15,8 @@ if [[ -f "$HOME/.gitconfig" && ! -L "$HOME/.gitconfig" ]]; then
 fi
 fresh gitconfig --file
 
+fresh Xmodmap --file
+
 # TMUX
 # Save history to file
 fresh foobacca/dotfiles tmux/ctrl-a --file=~/tmux.conf

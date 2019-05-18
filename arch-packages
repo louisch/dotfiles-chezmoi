@@ -22,13 +22,35 @@ PACMANINSTALLFLAGS="-Sq --needed --noconfirm"
 # sudo grub-mkconfig -o /boot/grub/grub.cfg
 # echo "Remember to edit /etc/mkinitcpio.conf to enable KVM"
 
+# Main packages
+BASE="base-devel"
+DEV="blender cmake docker docker-compose git git-lfs gimp inkscape jdk-openjdk mono neovim python-neovim nodejs powerline python python-pip python2 ruby tmux vagrant virtualbox virtualbox-guest-iso virtualbox-guest-utils"
+GNOME=""
+GNOMEEXTRA=""
+# Uncomment to enable gnome
+#GNOME="baobab evince file-roller gdm gnome-backgrounds gnome-boxes gnome-calculator gnome-characters gnome-clocks gnome-color-manager gnome-control-center gnome-disk-utility gnome-font-viewer gnome-getting-started-docs gnome-keyring gnome-logs gnome-menus gnome-remote-desktop gnome-screenshot gnome-session gnome-settings-daemon gnome-shell gnome-system-monitor gnome-terminal gnome-themes-extra gnome-user-docs gvfs gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-smb mousetweaks mutter nautilus rygel simple-scan sushi tracker tracker-miners xdg-user-dirs-gtk yelp"
+#GNOMEEXTRA="chrome-gnome-shell dconf-editor gnome-nettool gnome-tweaks gnome-usage libsecret seahorse"
+XFCE=""
+XFCESUPPLEMENT=""
+# Uncomment to enable xfce
+XFCE="exo garcon gtk-xfce-engine thunar thunar-media-tags-plugin thunar-volman tumbler xfce4-appfinder xfce4-artwork xfce4-datetime-plugin xfce4-dev-tools xfce4-fsguard-plugin xfce4-netload-plugin xfce4-notifyd xfce4-panel xfce4-power-manager xfce4-pulseaudio-plugin xfce4-screenshooter xfce4-session xfce4-settings xfce4-systemload-plugin xfce4-taskmanager xfce4-terminal xfconf xfdesktop xfwm4 xfwm4-themes"
+XFCESUPPLEMENT="lightdm lightdm-gtk-greeter lxtask"
+NETWORK="networkmanager"
+THEMING="adapta-gtk-theme gtk-engine-murrine noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-roboto"
+OTHERS="alsa-utils btrfs-progs keepass ntp xclip xdotool xsel"
+export ALLPACKAGES="$BASE $DEV $GNOME $GNOMEEXTRA $XFCE $XFCESUPPLEMENT $NETWORK $DESKTOPAPPS $THEMING $OTHERS"
+
+"${PACMANCMD[@]}" -Syuq --noconfirm
 "${PACMANCMD[@]}" -Sq --noconfirm --needed $ALLPACKAGES || echo "This script must be run as either root or a sudoer to install pacman packages!"
 
 # Activate software
-sudo systemctl enable gdm.service
+# Uncomment for GNOME
+# sudo systemctl enable gdm.service
+# gsettings set org.gnome.desktop.interface gtk-theme Adapta-Eta
+sudo systemctl enable docker.service
+sudo systemctl start docker.service
 sudo systemctl enable NetworkManager.service
 sudo systemctl start NetworkManager.service
-gsettings set org.gnome.desktop.interface gtk-theme Adapta-Eta
 
 # Install packages from AUR
 AURDEV="anaconda android-studio unityhub"
@@ -54,7 +76,3 @@ if ! pacman -Qqs "chat"; then
   curl "$chaturl" > "$chatname"
   debtap "$chatname"
 fi
-
-# Activate software
-sudo systemctl enable docker.service
-sudo systemctl start docker.service

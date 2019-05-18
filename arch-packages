@@ -58,10 +58,12 @@ sudo systemctl start NetworkManager.service
 
 # Install packages from AUR
 AURDEV="anaconda android-studio unityhub"
-AURINTERNET="google-chrome discord synology-drive"
+AURINTERNET="google-chrome discord"
 AURENTERTAINMENT="spotify"
 AUROTHERS="debtap lightdm-slick-greeter nvm powerline-fonts-git python2-neovim"
-AURPACKAGES="$AURDEV $AURINTERNET $AURENTERTAINMENT $AUROTHERS"
+# Packages needed only at work
+#AURWORK="synology-drive"
+AURPACKAGES="$AURDEV $AURINTERNET $AURENTERTAINMENT $AUROTHERS $AURWORK"
 if [ -x /usr/bin/yay ]; then
   echo "Yay already installed!"
 else

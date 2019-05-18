@@ -33,11 +33,11 @@ GNOMEEXTRA=""
 XFCE=""
 XFCESUPPLEMENT=""
 # Uncomment to enable xfce
-XFCE="exo garcon gtk-xfce-engine thunar thunar-media-tags-plugin thunar-volman tumbler xfce4-appfinder xfce4-artwork xfce4-datetime-plugin xfce4-dev-tools xfce4-fsguard-plugin xfce4-netload-plugin xfce4-notifyd xfce4-panel xfce4-power-manager xfce4-pulseaudio-plugin xfce4-screenshooter xfce4-session xfce4-settings xfce4-systemload-plugin xfce4-taskmanager xfce4-terminal xfconf xfdesktop xfwm4 xfwm4-themes"
-XFCESUPPLEMENT="lightdm lightdm-gtk-greeter lxtask"
+XFCE="exo garcon gtk-xfce-engine thunar thunar-media-tags-plugin thunar-volman tumbler xfce4-appfinder xfce4-artwork xfce4-datetime-plugin xfce4-dev-tools xfce4-fsguard-plugin xfce4-netload-plugin xfce4-notifyd xfce4-panel xfce4-power-manager xfce4-pulseaudio-plugin xfce4-screenshooter xfce4-session xfce4-settings xfce4-systemload-plugin xfce4-taskmanager xfce4-terminal xfconf xfdesktop xfwm4 xfwm4-themes xfce4-battery-plugin xfce4-clipman-plugin xfce4-cpufreq-plugin xfce4-cpugraph-plugin xfce4-datetime-plugin xfce4-diskperf-plugin xfce4-fsguard-plugin xfce4-netload-plugin xfce4-notifyd xfce4-sensors-plugin xfce4-xkb-plugin"
+XFCESUPPLEMENT="lightdm lightdm-gtk-greeter lxtask pavucontrol"
 NETWORK="networkmanager"
 THEMING="adapta-gtk-theme gtk-engine-murrine noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-roboto"
-OTHERS="alsa-utils baobab evince btrfs-progs gnome-keyring keepass libsecret ntp seahorse xclip xdotool xsel"
+OTHERS="alsa-utils baobab evince btrfs-progs gnome-keyring keepass libsecret ntp pulseaudio seahorse xclip xdotool xf86-input-libinput xorg-xinput xsel"
 export ALLPACKAGES="$BASE $DEV $GNOME $GNOMEEXTRA $XFCE $XFCESUPPLEMENT $NETWORK $DESKTOPAPPS $THEMING $OTHERS"
 
 "${PACMANCMD[@]}" -Syuq --noconfirm
@@ -60,7 +60,7 @@ sudo systemctl start NetworkManager.service
 AURDEV="anaconda android-studio unityhub"
 AURINTERNET="google-chrome discord"
 AURENTERTAINMENT="spotify"
-AUROTHERS="debtap lightdm-slick-greeter nvm powerline-fonts-git python2-neovim"
+AUROTHERS="debtap lightdm-slick-greeter nvm powerline-fonts-git python2-neovim ulauncher"
 # Packages needed only at work
 #AURWORK="synology-drive"
 AURPACKAGES="$AURDEV $AURINTERNET $AURENTERTAINMENT $AUROTHERS $AURWORK"

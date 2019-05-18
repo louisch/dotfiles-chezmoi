@@ -28,8 +28,8 @@ DEV="blender cmake docker docker-compose git git-lfs gimp inkscape jdk-openjdk m
 GNOME=""
 GNOMEEXTRA=""
 # Uncomment to enable gnome
-#GNOME="baobab evince file-roller gdm gnome-backgrounds gnome-boxes gnome-calculator gnome-characters gnome-clocks gnome-color-manager gnome-control-center gnome-disk-utility gnome-font-viewer gnome-getting-started-docs gnome-keyring gnome-logs gnome-menus gnome-remote-desktop gnome-screenshot gnome-session gnome-settings-daemon gnome-shell gnome-system-monitor gnome-terminal gnome-themes-extra gnome-user-docs gvfs gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-smb mousetweaks mutter nautilus rygel simple-scan sushi tracker tracker-miners xdg-user-dirs-gtk yelp"
-#GNOMEEXTRA="chrome-gnome-shell dconf-editor gnome-nettool gnome-tweaks gnome-usage libsecret seahorse"
+#GNOME="file-roller gdm gnome-backgrounds gnome-boxes gnome-calculator gnome-characters gnome-clocks gnome-color-manager gnome-control-center gnome-disk-utility gnome-font-viewer gnome-getting-started-docs gnome-logs gnome-menus gnome-remote-desktop gnome-screenshot gnome-session gnome-settings-daemon gnome-shell gnome-system-monitor gnome-terminal gnome-themes-extra gnome-user-docs gvfs gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-smb mousetweaks mutter nautilus rygel simple-scan sushi tracker tracker-miners xdg-user-dirs-gtk yelp"
+#GNOMEEXTRA="chrome-gnome-shell dconf-editor gnome-nettool gnome-tweaks gnome-usage"
 XFCE=""
 XFCESUPPLEMENT=""
 # Uncomment to enable xfce
@@ -37,7 +37,7 @@ XFCE="exo garcon gtk-xfce-engine thunar thunar-media-tags-plugin thunar-volman t
 XFCESUPPLEMENT="lightdm lightdm-gtk-greeter lxtask"
 NETWORK="networkmanager"
 THEMING="adapta-gtk-theme gtk-engine-murrine noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-roboto"
-OTHERS="alsa-utils btrfs-progs keepass ntp xclip xdotool xsel"
+OTHERS="alsa-utils baobab evince btrfs-progs gnome-keyring keepass libsecret ntp seahorse xclip xdotool xsel"
 export ALLPACKAGES="$BASE $DEV $GNOME $GNOMEEXTRA $XFCE $XFCESUPPLEMENT $NETWORK $DESKTOPAPPS $THEMING $OTHERS"
 
 "${PACMANCMD[@]}" -Syuq --noconfirm
@@ -47,6 +47,10 @@ export ALLPACKAGES="$BASE $DEV $GNOME $GNOMEEXTRA $XFCE $XFCESUPPLEMENT $NETWORK
 # Uncomment for GNOME
 # sudo systemctl enable gdm.service
 # gsettings set org.gnome.desktop.interface gtk-theme Adapta-Eta
+# Uncomment for XFCE
+sudo systemctl enable lightdm.service
+echo "Remember to set greeter in /etc/lightdm/lightdm.conf!"
+
 sudo systemctl enable docker.service
 sudo systemctl start docker.service
 sudo systemctl enable NetworkManager.service

@@ -74,6 +74,7 @@ else
   cd ..
   rm -rf yay
 fi
+yay -Syuaq --noconfirm
 yay -Sq --needed --noconfirm $AURPACKAGES
 
 if ! pacman -Qqs "chat"; then

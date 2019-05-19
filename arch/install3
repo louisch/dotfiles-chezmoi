@@ -1,0 +1,3 @@
+pacstrap /mnt base neovim
+genfstab -U /mnt >> /mnt/etc/fstab
+echo "Please inspect /mnt/etc/fstab before continuing... Next, download install scripts from louisch/dotfiles"

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo "Setting console font..."
+setfont Lat2-Terminus16
+
+EFIMODE=true
+if [[ ! -d "/sys/firmware/efi/efivars" ]]; then
+  echo "efivars directory does not exist! Likely BIOS or CSM mode"
+  EFIMODE=false
+elif [[ -z "$(ls /sys/firmware/efi/efivars)" ]]; then
+  echo "efivars directory exists at /sys/firmware/efi/efivars but is empty. Most likely efi mode?"
+else
+  echo "efivars directory exists at /sys/firmware/efi/efivars but is not empty. Likely efi mode."
+fi
+
+systemctl enable dhcpcd.service
+systemctl start dhcpcd.service
+
+echo "Available network interfaces: $(ip link) (Please setup the network before proceeding)"

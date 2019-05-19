@@ -1,0 +1,21 @@
+echo "Uncomment required locale in /etc/locale.gen before running this script!"
+
+MYREGION="Asia/Hong_Kong"
+MYLOCALE="en_GB.UTF-8"
+MYCONSOLEFONT="Lat2-Terminus16"
+
+# Set to required timezone
+ln -sf "/usr/share/zoneinfo/$MYREGION" /etc/localtime
+hwclock --systohc
+
+locale-gen
+# Set to required locale
+echo "LANG=$MYLOCALE" > /etc/locale.conf
+echo "FONT=$MYCONSOLEFONT" > /etc/vconsole.conf
+cp hosts /etc/hosts
+
+echo "Remember to set a root password!"
+
+pacman -S grub efibootmgr
+grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
+grub-mkconfig -o /boot/grub/grub.cfg

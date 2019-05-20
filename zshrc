@@ -97,4 +97,4 @@ source $ZSH/oh-my-zsh.sh
 
 
 # Set up Node Version Manager
-source /usr/share/nvm/init-nvm.sh
+#source /usr/share/nvm/init-nvm.sh

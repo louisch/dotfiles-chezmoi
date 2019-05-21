@@ -24,7 +24,7 @@ PACMANINSTALLFLAGS="-Sq --needed --noconfirm"
 
 # Main packages
 BASE="base-devel"
-DEV="blender cmake docker docker-compose git git-lfs gimp inkscape jdk-openjdk mono neovim python-neovim nodejs powerline python python-pip python2 ruby tmux vagrant virtualbox virtualbox-guest-iso virtualbox-guest-utils"
+DEV="blender cmake docker docker-compose git git-lfs gimp inkscape jdk-openjdk mono neovim python-neovim nodejs npm powerline python python-pip python2 ruby tmux vagrant virtualbox virtualbox-guest-iso virtualbox-guest-utils zsh"
 GNOME=""
 GNOMEEXTRA=""
 # Uncomment to enable gnome
@@ -37,7 +37,7 @@ XFCE="exo garcon gtk-xfce-engine thunar thunar-media-tags-plugin thunar-volman t
 XFCESUPPLEMENT="lightdm lightdm-gtk-greeter lxtask pavucontrol"
 NETWORK="networkmanager"
 THEMING="adapta-gtk-theme gtk-engine-murrine noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-roboto"
-OTHERS="alsa-utils baobab evince btrfs-progs gnome-keyring keepass libsecret ntp pulseaudio seahorse xclip xdotool xf86-input-libinput xorg-xinput xsel"
+OTHERS="alsa-utils baobab efibootmgr evince btrfs-progs gnome-keyring grub keepass libsecret ntp pulseaudio seahorse xclip xdotool xf86-input-libinput xorg-xinput xsel"
 export ALLPACKAGES="$BASE $DEV $GNOME $GNOMEEXTRA $XFCE $XFCESUPPLEMENT $NETWORK $DESKTOPAPPS $THEMING $OTHERS"
 
 "${PACMANCMD[@]}" -Syuq --noconfirm

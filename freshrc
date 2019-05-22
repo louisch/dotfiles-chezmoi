@@ -1,3 +1,5 @@
+# vim: set ft=sh:
+
 # handles updating fresh
 fresh freshshell/fresh bin/fresh --bin
 
@@ -16,6 +18,7 @@ fi
 fresh gitconfig --file
 
 fresh Xmodmap --file
+fresh xprofile --file
 
 # TMUX
 # Save history to file

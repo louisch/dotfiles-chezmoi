@@ -1,0 +1,7 @@
+ping -qc 3 google.com && echo "Network connection confirmed. Continuing install..." || (echo "Please establish network connection before continuing."; exit 1)
+
+echo "Turning on NTP"
+timedatectl set-ntp true
+
+printf "Available block devices: \n$(lsblk)\n(Please partition the disks before continuing)\n"
+echo "Also, please customize /etc/pacman.d/mirrorlist before using install3"

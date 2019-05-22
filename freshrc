@@ -1,6 +1,32 @@
 # vim: set ft=sh:
 
+# handles updating fresh
 fresh freshshell/fresh bin/fresh --bin
 
-fresh freshshell/fresh contrib/source-build.sh --file=~/.bash_profile
-fresh freshshell/fresh contrib/source-build.sh --file=~/.bashrc
+DOTFILESDIR="$HOME/.dotfiles"
+NEOVIMDIR="$HOME/.config/nvim"
+
+if [[ -f "$HOME/.profile" && ! -L "$HOME/.profile" ]]; then
+    mv "$HOME/.profile" "$HOME/.dotfiles/.profile"
+fi
+fresh profile --file
+
+# links your local ~/.dotfiles/gitconfig to ~/.gitconfig (you can change your local directory by setting $FRESH_LOCAL)
+if [[ -f "$HOME/.gitconfig" && ! -L "$HOME/.gitconfig" ]]; then
+    mv "$HOME/.gitconfig" "$HOME/.dotfiles/gitconfig"
+fi
+fresh gitconfig --file
+
+fresh Xmodmap --file
+fresh xprofile --file
+
+# TMUX
+# Save history to file
+fresh foobacca/dotfiles tmux/ctrl-a --file=~/tmux.conf
+fresh foobacca/dotfiles tmux/misc-bindings --file=~/tmux.conf
+fresh foobacca/dotfiles tmux/save-buffer-history --file=~/tmux.conf
+fresh foobacca/dotfiles tmux/vi --file=~/tmux.conf
+fresh tmux.conf --file
+
+# Bash
+fresh bashrc --file

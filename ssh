@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Substitute in your own email
+ssh-keygen -t rsa -b 4096 -C "louisch@fastmail.com" \
+&& echo "Adding ssh key to ssh-agent" \
+&& eval "$(ssh-agent -s)" \
+&& ssh-add ~/.ssh/id_rsa \
+&& xclip -sel clip < ~/.ssh/id_rsa.pub \
+&& echo "Generated public key copied to clipboard. Now paste the copied key to Github"

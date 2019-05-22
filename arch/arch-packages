@@ -1,0 +1,85 @@
+#!/bin/bash
+
+if [[ $EUID == 0 ]]; then
+  PACMANCMD=( pacman )
+else
+  PACMANCMD=( sudo pacman )
+fi
+PACMANINSTALLFLAGS="-Sq --needed --noconfirm"
+
+# Install packages from official repositories
+
+# "${PACMANCMD[@]}" $PACMANINSTALLFLAGS reflector
+# sudo reflector -l 100 --sort rate --save /etc/pacman.d/mirrorlist
+
+# Uncomment if broadcom wireless driver is needed
+# "${PACMANCMD[@]}" $PACMANINSTALLFLAGS broadcom-wl-dkms
+# sudo modprobe wl
+# sudo echo "wl" >> /etc/modules-load.d/modprobe.conf
+
+# Uncomment if on Intel processor
+# "${PACMANCMD[@]}" $PACMANINSTALLFLAGS intel-ucode mesa lib32-mesa vulkan-intel
+# sudo grub-mkconfig -o /boot/grub/grub.cfg
+# echo "Remember to edit /etc/mkinitcpio.conf to enable KVM"
+
+# Main packages
+BASE="base-devel"
+DEV="blender cmake docker docker-compose git git-lfs gimp inkscape jdk-openjdk mono neovim python-neovim nodejs powerline python python-pip python2 ruby tmux vagrant virtualbox virtualbox-guest-iso virtualbox-guest-utils"
+GNOME=""
+GNOMEEXTRA=""
+# Uncomment to enable gnome
+#GNOME="file-roller gdm gnome-backgrounds gnome-boxes gnome-calculator gnome-characters gnome-clocks gnome-color-manager gnome-control-center gnome-disk-utility gnome-font-viewer gnome-getting-started-docs gnome-logs gnome-menus gnome-remote-desktop gnome-screenshot gnome-session gnome-settings-daemon gnome-shell gnome-system-monitor gnome-terminal gnome-themes-extra gnome-user-docs gvfs gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-smb mousetweaks mutter nautilus rygel simple-scan sushi tracker tracker-miners xdg-user-dirs-gtk yelp"
+#GNOMEEXTRA="chrome-gnome-shell dconf-editor gnome-nettool gnome-tweaks gnome-usage"
+XFCE=""
+XFCESUPPLEMENT=""
+# Uncomment to enable xfce
+XFCE="exo garcon gtk-xfce-engine thunar thunar-media-tags-plugin thunar-volman tumbler xfce4-appfinder xfce4-artwork xfce4-datetime-plugin xfce4-dev-tools xfce4-fsguard-plugin xfce4-netload-plugin xfce4-notifyd xfce4-panel xfce4-power-manager xfce4-pulseaudio-plugin xfce4-screenshooter xfce4-session xfce4-settings xfce4-systemload-plugin xfce4-taskmanager xfce4-terminal xfconf xfdesktop xfwm4 xfwm4-themes xfce4-battery-plugin xfce4-clipman-plugin xfce4-cpufreq-plugin xfce4-cpugraph-plugin xfce4-datetime-plugin xfce4-diskperf-plugin xfce4-fsguard-plugin xfce4-netload-plugin xfce4-notifyd xfce4-sensors-plugin xfce4-xkb-plugin"
+XFCESUPPLEMENT="lightdm lightdm-gtk-greeter lxtask pavucontrol"
+NETWORK="networkmanager"
+THEMING="adapta-gtk-theme gtk-engine-murrine noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-roboto"
+OTHERS="alsa-utils baobab evince btrfs-progs gnome-keyring keepass libsecret ntp pulseaudio seahorse xclip xdotool xf86-input-libinput xorg-xinput xsel"
+export ALLPACKAGES="$BASE $DEV $GNOME $GNOMEEXTRA $XFCE $XFCESUPPLEMENT $NETWORK $DESKTOPAPPS $THEMING $OTHERS"
+
+"${PACMANCMD[@]}" -Syuq --noconfirm
+"${PACMANCMD[@]}" -Sq --noconfirm --needed $ALLPACKAGES || echo "This script must be run as either root or a sudoer to install pacman packages!"
+
+# Activate software
+# Uncomment for GNOME
+# sudo systemctl enable gdm.service
+# gsettings set org.gnome.desktop.interface gtk-theme Adapta-Eta
+# Uncomment for XFCE
+sudo systemctl enable lightdm.service
+echo "Remember to set greeter in /etc/lightdm/lightdm.conf!"
+
+sudo systemctl enable docker.service
+sudo systemctl start docker.service
+sudo systemctl enable NetworkManager.service
+sudo systemctl start NetworkManager.service
+
+# Install packages from AUR
+AURDEV="anaconda android-studio unityhub"
+AURINTERNET="google-chrome discord"
+AURENTERTAINMENT="spotify"
+AUROTHERS="debtap lightdm-slick-greeter nvm powerline-fonts-git python2-neovim ulauncher"
+# Packages needed only at work
+#AURWORK="synology-drive"
+AURPACKAGES="$AURDEV $AURINTERNET $AURENTERTAINMENT $AUROTHERS $AURWORK"
+if [ -x /usr/bin/yay ]; then
+  echo "Yay already installed!"
+else
+  git clone https://aur.archlinux.org/yay.git
+  cd yay
+  makepkg -si
+  "${PACMANCMD[@]}" -U *.pkg.xz || echo "This script must be run as either root or a sudoer to install pacman packages!"
+  cd ..
+  rm -rf yay
+fi
+yay -Syuaq --noconfirm
+yay -Sq --needed --noconfirm $AURPACKAGES
+
+if ! pacman -Qqs "chat"; then
+  chatname='Chat_1.0.1-40_amd64.deb'
+  chaturl="https://global.download.synology.com/download/Tools/ChatClient/1.0.1-40/Ubuntu/x86_64/Chat_1.0.1-40_amd64.deb?model=DS1517&bays=5&dsm_version=6.2.2&build_number=24922"
+  curl "$chaturl" > "$chatname"
+  debtap "$chatname"
+fi

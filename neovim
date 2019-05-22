@@ -4,10 +4,9 @@ if [[ ! "$NEOVIMDIR" ]]; then
   echo "Setting NEOVIMDIR to $NEOVIMDIR"
 fi
 YOUCOMPLETEME=true
-YOUCOMPLETEMEFLAGS="--clang-completer --cs-completer --java-completer --ts-completer"
+YCMFLAGS=("clang-completer" "cs-completer" "java-completer" "ts-completer")
+YCMDIR="$NEOVIMDIR/dein/repos/github.com/Valloric/YouCompleteMe"
 LOCALVIMCONTENTS="let nvimdir = \"$NEOVIMDIR\""
-# Use this one instead if on Arch Linux
-#LOCALVIMCONTENTS="let nvimdir = \"$NEOVIMDIR\"\nlet g:python_host_prog=/usr/bin/python2\nlet g:python3_host_prog=/usr/bin/python3"
 
 echo ""
 echo "Pulling dotnvim from github..."
@@ -26,12 +25,26 @@ fi
 
 echo ""
 echo "Checking for Python provider..."
-if [[ ! $(nvim --version | grep py) ]]; then
+TEMPCHECKHEALTHFILE=checkhealth.log
+nvim -N -u NONE -n -es -c ":checkhealth" -c ":w $TEMPCHECKHEALTHFILE"
+if [[ ! $(cat $TEMPCHECKHEALTHFILE | grep Py) ]]; then
   echo "Please install Python provider before proceeding"
+  rm "$TEMPCHECKHEALTHFILE"
   exit -1
 fi
+rm "$TEMPCHECKHEALTHFILE"
+echo "Python provider found! Proceeding..."
+
 echo "Trying to Install Node provider to Neovim..."
-npm install -g neovim
+if [[ $EUID == 0 ]]; then
+  NPMCMD=( npm )
+else
+  NPMCMD=( sudo npm )
+fi
+if [[ ! $(${NPMCMD[@]} install -g neovim) ]]; then
+  echo "Please install node/npm before proceeding"
+  exit -1
+fi
 
 if [[ ! -d "$NEOVIMDIR/dein" ]]; then
   echo ""
@@ -39,11 +52,15 @@ if [[ ! -d "$NEOVIMDIR/dein" ]]; then
   curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
   sh ./installer.sh "$NEOVIMDIR/dein"
   rm installer.sh  # we can remove the installation script afterwards
-  echo "Making sure dein packages are up to date..."
-  nvim -c ':call dein#install() | :q'
-  echo "Installing YouCompleteMe..."
-  cd "$NEOVIMDIR/dein/repos/github.com/Valloric/YouCompleteMe"
-  ./install.py "YOUCOMPLETEMEFLAGS"
+  echo "Now open up Neovim and run ':call dein#install()'"
+fi
+
+if [[ -d "$YCMDIR" ]]; then
+  cwd=$PWD
+  cd "$YCMDIR"
+  git submodule update --init --recursive
+  ./install.py "${YCMFLAGS[@]/#/--}"
+  cd "$cwd"
 fi
 
 echo "Consider using :checkhealth to find further issues"

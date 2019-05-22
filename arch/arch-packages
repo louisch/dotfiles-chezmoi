@@ -24,7 +24,7 @@ PACMANINSTALLFLAGS="-Sq --needed --noconfirm"
 
 # Main packages
 BASE="base-devel"
-DEV="blender cmake docker docker-compose git git-lfs gimp inkscape jdk-openjdk mono neovim python-neovim nodejs powerline python python-pip python2 ruby tmux vagrant virtualbox virtualbox-guest-iso virtualbox-guest-utils"
+DEV="blender cmake docker docker-compose git git-lfs gimp inkscape jdk-openjdk mono neovim python-neovim nodejs npm powerline python python-pip python2 ruby tmux vagrant virtualbox virtualbox-guest-iso virtualbox-guest-utils zsh"
 GNOME=""
 GNOMEEXTRA=""
 # Uncomment to enable gnome
@@ -35,10 +35,11 @@ XFCESUPPLEMENT=""
 # Uncomment to enable xfce
 XFCE="exo garcon gtk-xfce-engine thunar thunar-media-tags-plugin thunar-volman tumbler xfce4-appfinder xfce4-artwork xfce4-datetime-plugin xfce4-dev-tools xfce4-fsguard-plugin xfce4-netload-plugin xfce4-notifyd xfce4-panel xfce4-power-manager xfce4-pulseaudio-plugin xfce4-screenshooter xfce4-session xfce4-settings xfce4-systemload-plugin xfce4-taskmanager xfce4-terminal xfconf xfdesktop xfwm4 xfwm4-themes xfce4-battery-plugin xfce4-clipman-plugin xfce4-cpufreq-plugin xfce4-cpugraph-plugin xfce4-datetime-plugin xfce4-diskperf-plugin xfce4-fsguard-plugin xfce4-netload-plugin xfce4-notifyd xfce4-sensors-plugin xfce4-xkb-plugin"
 XFCESUPPLEMENT="lightdm lightdm-gtk-greeter lxtask pavucontrol nm-applet"
+INPUTMETHOD="ibus ibus-rime ibus-anthy"
 NETWORK="networkmanager"
 THEMING="adapta-gtk-theme gtk-engine-murrine noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-roboto"
-OTHERS="alsa-utils baobab evince btrfs-progs gnome-keyring keepass libsecret ntp pulseaudio seahorse xclip xdotool xf86-input-libinput xorg-xinput xsel"
-export ALLPACKAGES="$BASE $DEV $GNOME $GNOMEEXTRA $XFCE $XFCESUPPLEMENT $NETWORK $DESKTOPAPPS $THEMING $OTHERS"
+OTHERS="alsa-utils baobab efibootmgr evince btrfs-progs gnome-keyring grub keepass libsecret ntp pulseaudio seahorse xclip xdotool xf86-input-libinput xorg-xinput xsel"
+export ALLPACKAGES="$BASE $DEV $GNOME $GNOMEEXTRA $XFCE $XFCESUPPLEMENT $INPUTMETHOD $NETWORK $DESKTOPAPPS $THEMING $OTHERS"
 
 "${PACMANCMD[@]}" -Syuq --noconfirm
 "${PACMANCMD[@]}" -Sq --noconfirm --needed $ALLPACKAGES || echo "This script must be run as either root or a sudoer to install pacman packages!"

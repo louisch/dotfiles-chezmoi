@@ -1,3 +1,5 @@
+# vim: set ft=sh:
+
 # handles updating fresh
 fresh freshshell/fresh bin/fresh --bin
 

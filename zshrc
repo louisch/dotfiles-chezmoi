@@ -94,6 +94,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias sudo='sudo ' # Allows sudo to be used with aliases
+alias pacS="pacman -S --assume-installed nodejs=10.15.3"
 
 
 # Set up Node Version Manager

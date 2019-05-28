@@ -1,5 +1,7 @@
 ping -qc 3 google.com && echo "Network connection confirmed. Continuing install..." || (echo "Please establish network connection before continuing."; exit 1)
 
+cp resolvconf.conf /etc/resolvconf.conf
+
 echo "Turning on NTP"
 timedatectl set-ntp true
 

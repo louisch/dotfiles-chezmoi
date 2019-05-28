@@ -1,13 +1,27 @@
 #!/bin/bash
+
+
+# Variables
 if [[ ! "$NEOVIMDIR" ]]; then
-  NEOVIMDIR=~/.config/nvim
+  NEOVIMDIR=$HOME/.config/nvim
   echo "Setting NEOVIMDIR to $NEOVIMDIR"
 fi
-YOUCOMPLETEME=true
-YCMFLAGS=("clang-completer" "cs-completer" "java-completer" "ts-completer")
-YCMDIR="$NEOVIMDIR/dein/repos/github.com/Valloric/YouCompleteMe"
+NVIMSHAREDIR="$HOME/.local/share/nvim"
+
 LOCALVIMCONTENTS="let nvimdir = \"$NEOVIMDIR\""
 
+TEMPCHECKHEALTHFILE=checkhealth.log
+
+VIMPLUGTARGETFILE="$NVIMSHAREDIR/site/autoload/plug.vim"
+VIMPLUGPACKAGEDIR="$NVIMSHAREDIR/plugged"
+
+YOUCOMPLETEME=true
+YCMFLAGS=("clang-completer" "cs-completer" "java-completer" "ts-completer")
+YCMDIR="$VIMPLUGPACKAGEDIR/YouCompleteMe"
+echo "$VIMPLUGTARGETFILE"
+
+
+# dotnvim
 echo ""
 echo "Pulling dotnvim from github..."
 if [[ ! -d "$NEOVIMDIR" ]]; then
@@ -17,15 +31,18 @@ else
   git pull
 fi
 
+
+# local.vim
 if [[ ! -f "$NEOVIMDIR/local.vim" ]]; then
   echo ""
   echo "Creating local.vim file with contents: $LOCALVIMCONTENTS"
   echo "$LOCALVIMCONTENTS" > "$NEOVIMDIR/local.vim"
 fi
 
+
+# Providers check
 echo ""
 echo "Checking for Python provider..."
-TEMPCHECKHEALTHFILE=checkhealth.log
 nvim -N -u NONE -n -es -c ":checkhealth" -c ":w $TEMPCHECKHEALTHFILE"
 if [[ ! $(cat $TEMPCHECKHEALTHFILE | grep Py) ]]; then
   echo "Please install Python provider before proceeding"
@@ -46,21 +63,28 @@ if [[ ! $(${NPMCMD[@]} install -g neovim) ]]; then
   exit -1
 fi
 
-if [[ ! -d "$NEOVIMDIR/dein" ]]; then
+
+# vim-plug
+if [[ ! -f "$VIMPLUGTARGETFILE" || ! -d "$VIMPLUGPACKAGEDIR" ]]; then
   echo ""
-  echo "Installing dein for the first time..."
-  curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-  sh ./installer.sh "$NEOVIMDIR/dein"
-  rm installer.sh  # we can remove the installation script afterwards
-  echo "Now open up Neovim and run ':call dein#install()'"
+  echo "Installing vim-plug to $VIMPLUGTARGETFILE..."
+  curl -fLo "$VIMPLUGTARGETFILE" --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  echo "Opening neovim to install plugins..."
+  nvim +PlugInstall +qall
 fi
 
+
+# YouCompleteMe
 if [[ -d "$YCMDIR" ]]; then
+  echo ""
+  echo "Installing YouCompleteMe"
   cwd=$PWD
   cd "$YCMDIR"
-  git submodule update --init --recursive
   ./install.py "${YCMFLAGS[@]/#/--}"
   cd "$cwd"
 fi
 
+# Final warnings
+echo ""
 echo "Consider using :checkhealth to find further issues"

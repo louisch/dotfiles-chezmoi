@@ -22,6 +22,7 @@ fresh xprofile --file
 
 # TMUX
 # Save history to file
+[[ ! -d "$HOME/.tmux/plugins/tpm" ]] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fresh foobacca/dotfiles tmux/ctrl-a --file=~/tmux.conf
 fresh foobacca/dotfiles tmux/misc-bindings --file=~/tmux.conf
 fresh foobacca/dotfiles tmux/save-buffer-history --file=~/tmux.conf

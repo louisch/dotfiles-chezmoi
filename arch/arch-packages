@@ -58,7 +58,7 @@ sudo systemctl enable NetworkManager.service
 sudo systemctl start NetworkManager.service
 
 # Install packages from AUR
-AURDEV="anaconda android-studio unityhub"
+AURDEV="anaconda android-studio bfg unityhub"
 AURINTERNET="google-chrome discord"
 AURENTERTAINMENT="spotify"
 AUROTHERS="debtap lightdm-slick-greeter nvm powerline-fonts-git python2-neovim ulauncher"

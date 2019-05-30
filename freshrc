@@ -30,3 +30,5 @@ fresh tmux.conf --file
 
 # Bash
 fresh bashrc --file
+
+fresh zshrc --file

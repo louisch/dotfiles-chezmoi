@@ -96,6 +96,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias sudo='sudo ' # Allows sudo to be used with aliases
 alias pacS="pacman -S --assume-installed nodejs=10.15.3"
+alias cliprsa="cat ~/.ssh/id_rsa.pub | xclip -sel clip"
 
 
 # Bindings

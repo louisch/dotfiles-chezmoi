@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/louis/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -104,8 +104,10 @@ alias pacS="pacman -S --assume-installed nodejs=10.15.3"
 case `uname` in
     Linux)
         alias cliprsa="cat ~/.ssh/id_rsa.pub | xclip -sel clip"
+        ;;
     Darwin)
         alias cliprsa="pbcopy < ~/.ssh/id_rsa.pub"
+        ;;
 esac
 
 
@@ -119,7 +121,7 @@ bindkey -M vicmd 'j' history-substring-search-down
 
 
 # Set up Node Version Manager
-source /usr/share/nvm/init-nvm.sh
+#source /usr/share/nvm/init-nvm.sh
 # Uncomment if on Arch Linux
 #export NVM_DIR="$HOME/.nvm"                            # You can change this if you want.
 #export NVM_SOURCE="/usr/share/nvm"                     # The AUR package installs it to here.

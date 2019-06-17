@@ -6,10 +6,8 @@ fresh freshshell/fresh bin/fresh --bin
 DOTFILESDIR="$HOME/.dotfiles"
 NEOVIMDIR="$HOME/.config/nvim"
 
-if [[ -f "$HOME/.profile" && ! -L "$HOME/.profile" ]]; then
-    mv "$HOME/.profile" "$HOME/.dotfiles/.profile"
-fi
 fresh profile --file
+fresh profile --file="$HOME/.zprofile"
 
 # links your local ~/.dotfiles/gitconfig to ~/.gitconfig (you can change your local directory by setting $FRESH_LOCAL)
 if [[ -f "$HOME/.gitconfig" && ! -L "$HOME/.gitconfig" ]]; then

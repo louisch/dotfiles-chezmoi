@@ -27,6 +27,10 @@ fresh foobacca/dotfiles tmux/save-buffer-history --file=~/tmux.conf
 fresh foobacca/dotfiles tmux/vi --file=~/tmux.conf
 fresh tmux.conf --file
 
+for tmuxinatorconf in "${DOTFILESDIR}"/tmuxinator/*.yml; do
+    fresh tmuxinator/$(basename ${tmuxinatorconf}) --file="$HOME/.config/tmuxinator/$(basename ${tmuxinatorconf})"
+done
+
 # Bash
 fresh bashrc --file
 

@@ -84,3 +84,13 @@ if ! pacman -Qqs "chat"; then
   curl "$chaturl" > "$chatname"
   debtap "$chatname"
 fi
+
+# External non-arch packages
+NPMPACKAGES="expo-cli react-native-cli neovim"
+npm install -g $NPMPACKAGES
+
+PIPPACKAGES="neovim"
+pip install --user $PIPPACKAGES
+
+GEMPACKAGES="tmuxinator"
+gem install $GEMPACKAGES

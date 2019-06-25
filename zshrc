@@ -109,6 +109,8 @@ case `uname` in
         alias cliprsa="pbcopy < ~/.ssh/id_rsa.pub"
         ;;
 esac
+alias open="xdg-open"
+alias tx="tmuxinator"
 
 
 # Bindings

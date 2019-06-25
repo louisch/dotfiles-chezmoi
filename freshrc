@@ -1,10 +1,10 @@
 # vim: set ft=sh:
 
+DOTFILESDIR="${HOME}/.dotfiles"
+NEOVIMDIR="${HOME}/.config/nvim"
+
 # handles updating fresh
 fresh freshshell/fresh bin/fresh --bin
-
-DOTFILESDIR="$HOME/.dotfiles"
-NEOVIMDIR="$HOME/.config/nvim"
 
 fresh profile --file
 fresh profile --file="$HOME/.zprofile"
@@ -30,6 +30,7 @@ fresh tmux.conf --file
 for tmuxinatorconf in "${DOTFILESDIR}"/tmuxinator/*.yml; do
     fresh tmuxinator/$(basename ${tmuxinatorconf}) --file="$HOME/.config/tmuxinator/$(basename ${tmuxinatorconf})"
 done
+fresh tmuxinator/txc --bin
 
 # Bash
 fresh bashrc --file

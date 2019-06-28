@@ -54,9 +54,9 @@ echo "Python provider found! Proceeding..."
 
 echo "Trying to Install Node provider to Neovim..."
 if [[ $EUID == 0 ]]; then
-  NPMCMD=( npm )
-else
   NPMCMD=( sudo npm )
+else
+  NPMCMD=( npm )
 fi
 if [[ ! $(${NPMCMD[@]} install -g neovim) ]]; then
   echo "Please install node/npm before proceeding"

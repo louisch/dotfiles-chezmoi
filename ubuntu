@@ -1,0 +1,1 @@
+sudo apt-get build-essentials cmake git neovim python python-dev xclip

@@ -60,6 +60,8 @@ export DISABLE_AUTO_TITLE="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+ZSH_DISABLE_COMPFIX=true
+
 if [[ ! -d ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]]; then
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 fi
@@ -124,7 +126,8 @@ bindkey -M vicmd 'j' history-substring-search-down
 
 # Set up Node Version Manager
 #source /usr/share/nvm/init-nvm.sh
-# Uncomment if on Arch Linux
-#export NVM_DIR="$HOME/.nvm"                            # You can change this if you want.
+# Uncomment if on Ubuntu
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# Uncomment as well if on Arch Linux
 #export NVM_SOURCE="/usr/share/nvm"                     # The AUR package installs it to here.
-#[ -s "$NVM_SOURCE/nvm.sh" ] && . "$NVM_SOURCE/nvm.sh"  # Load NVM

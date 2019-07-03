@@ -46,7 +46,7 @@ windows:
       panes:
         - nvim freshrc
         -
-  - server:
+  - nvim:
       root: ~/.config/nvim
       layout: even-horizontal
       panes:

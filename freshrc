@@ -10,8 +10,11 @@ fresh profile --file
 fresh profile --file="$HOME/.zprofile"
 
 # links your local ~/.dotfiles/gitconfig to ~/.gitconfig (you can change your local directory by setting $FRESH_LOCAL)
-if [[ -f "$HOME/.gitconfig" && ! -L "$HOME/.gitconfig" ]]; then
-    mv "$HOME/.gitconfig" "$HOME/.dotfiles/gitconfig"
+if [[ ! -L "$HOME/.gitconfig" ]]; then
+    echo "First time setup detected. Please enter your desired git name/email."
+    read -p "name: " name
+    read -p "email: " email
+    printf "[user]\n    name = ${name}\n    email = ${email}\n" >> "${DOTFILESDIR}/gitconfig"
 fi
 fresh gitconfig --file
 

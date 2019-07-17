@@ -38,7 +38,7 @@ XFCESUPPLEMENT=(lightdm lightdm-gtk-greeter lxtask pavucontrol nm-applet)
 INPUTMETHOD=(ibus ibus-rime ibus-anthy)
 NETWORK=(networkmanager)
 THEMING=(adapta-gtk-theme gtk-engine-murrine noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-roboto)
-OTHERS=(alsa-utils baobab efibootmgr evince btrfs-progs gnome-keyring grub keepass libsecret ntp perl-rename pulseaudio seahorse xclip xdotool xf86-input-libinput xorg-xinput xsel)
+OTHERS=(alsa-utils baobab efibootmgr evince btrfs-progs gnome-keyring grub keepass libsecret mpv ntp perl-rename pulseaudio seahorse xclip xdotool xf86-input-libinput xorg-xinput xsel)
 export ALLPACKAGES=(${BASE[@]} ${DEV[@]} ${GNOME[@]} ${GNOMEEXTRA[@]} ${XFCE[@]} ${XFCESUPPLEMENT[@]} ${INPUTMETHOD[@]} ${NETWORK[@]} ${DESKTOPAPPS[@]} ${THEMING[@]} ${OTHERS[@]})
 
 "${PACMANCMD[@]}" -Syuq --noconfirm

@@ -6,6 +6,10 @@ NEOVIMDIR="${HOME}/.config/nvim"
 # handles updating fresh
 fresh freshshell/fresh bin/fresh --bin
 
+if [[ ! -L "$HOME/.profile" ]]; then
+    echo "Existing .profile detected. Backing up as .profile.bak"
+    mv "$HOME/.profile" "$HOME/.profile.bak"
+fi
 fresh profile --file
 fresh profile --file="$HOME/.zprofile"
 

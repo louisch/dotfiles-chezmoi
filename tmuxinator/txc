@@ -60,5 +60,5 @@ if [[ -z "${EDITOR}" ]]; then
     exit 1
 fi
 
-cp "${TMUXINATORDIR}/example.yml" "${TMUXINATORDIR}/$1" &&
+cp "${TMUXINATORDIR}/default.template.yml" "${TMUXINATORDIR}/$1" &&
 eval "${EDITOR}" "${TMUXINATORDIR}/$1"

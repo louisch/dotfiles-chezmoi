@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -113,6 +113,8 @@ case `uname` in
 esac
 alias open="xdg-open"
 alias tx="tmuxinator"
+alias whatismyip="curl https://ipinfo.io/ip"
+alias myip="whatismyip"
 
 
 # Bindings
@@ -125,9 +127,13 @@ bindkey -M vicmd 'j' history-substring-search-down
 
 
 # Set up Node Version Manager
-#source /usr/share/nvm/init-nvm.sh
+source /usr/share/nvm/init-nvm.sh
 # Uncomment if on Ubuntu
-#export NVM_DIR="$HOME/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # Uncomment as well if on Arch Linux
-#export NVM_SOURCE="/usr/share/nvm"                     # The AUR package installs it to here.
+export NVM_SOURCE="/usr/share/nvm"                     # The AUR package installs it to here.
+
+
+# Lean powerlevel10k Theme
+source "${HOME}/.config/zsh/p10k-lean.zsh"

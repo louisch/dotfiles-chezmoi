@@ -42,4 +42,6 @@ fresh tmuxinator/txc --bin
 # Bash
 fresh bashrc --file
 
-fresh zshrc --file
+# zsh
+fresh zsh/zshrc --file=~/.zshrc
+fresh zsh/p10k-lean.zsh --file=~/.config/zsh/p10k-lean.zsh

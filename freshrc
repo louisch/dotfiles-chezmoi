@@ -18,9 +18,10 @@ if [[ ! -L "$HOME/.gitconfig" ]]; then
     echo "First time setup detected. Please enter your desired git name/email."
     read -p "name: " name
     read -p "email: " email
-    printf "[user]\n    name = ${name}\n    email = ${email}\n" >> "${DOTFILESDIR}/gitconfig"
+    printf "[user]\n    name = ${name}\n    email = ${email}\n" > "${DOTFILESDIR}/gitconfig.local"
 fi
 fresh gitconfig --file
+fresh gitconfig.local --file=~/.gitconfig
 
 fresh Xmodmap --file
 fresh xprofile --file

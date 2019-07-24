@@ -45,7 +45,7 @@ windows:
       # synchronize: after
       panes:
         - l
-        -
+        - gst
   - server:
       layout: even-horizontal
       panes:

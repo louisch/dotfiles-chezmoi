@@ -33,12 +33,12 @@ fresh foobacca/dotfiles tmux/ctrl-a --file=~/tmux.conf
 fresh foobacca/dotfiles tmux/misc-bindings --file=~/tmux.conf
 fresh foobacca/dotfiles tmux/save-buffer-history --file=~/tmux.conf
 fresh foobacca/dotfiles tmux/vi --file=~/tmux.conf
-fresh tmux.conf --file
+fresh tmux/tmux.conf --file=~/tmux.conf
 
-for tmuxinatorconf in "${DOTFILESDIR}"/tmuxinator/*.yml; do
-    fresh tmuxinator/$(basename ${tmuxinatorconf}) --file="$HOME/.config/tmuxinator/$(basename ${tmuxinatorconf})"
+for tmuxinatorconf in "${DOTFILESDIR}"/tmux/*.yml; do
+    fresh tmux/$(basename ${tmuxinatorconf}) --file="$HOME/.config/tmuxinator/$(basename ${tmuxinatorconf})"
 done
-fresh tmuxinator/txc --bin
+fresh tmux/txc --bin
 
 # Bash
 fresh bashrc --file

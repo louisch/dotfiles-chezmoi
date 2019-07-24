@@ -392,3 +392,5 @@ fi
 
 (( ! p10k_lean_restore_aliases )) || setopt aliases
 'builtin' 'unset' 'p10k_lean_restore_aliases'
+
+POWERLEVEL9K_MODE='nerdfont-complete'

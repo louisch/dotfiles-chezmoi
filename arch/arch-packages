@@ -61,7 +61,7 @@ sudo systemctl start NetworkManager.service
 AURDEV=(anaconda android-studio bfg gitflow-avh unityhub)
 AURINTERNET=(google-chrome discord)
 AURENTERTAINMENT=(spotify)
-AUROTHERS=(debtap lightdm-slick-greeter nvm powerline-fonts-git python2-neovim ulauncher)
+AUROTHERS=(debtap lightdm-slick-greeter nerd-fonts-complete nvm powerline-fonts-git python2-neovim ulauncher)
 # Packages needed only at work
 #AURWORK=(synology-drive)
 AURPACKAGES=(${AURDEV[@]} ${AURINTERNET[@]} ${AURENTERTAINMENT[@]} ${AUROTHERS[@]} ${AURWORK[@]})

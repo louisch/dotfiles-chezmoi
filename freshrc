@@ -35,9 +35,11 @@ fresh foobacca/dotfiles tmux/save-buffer-history --file=~/tmux.conf
 fresh foobacca/dotfiles tmux/vi --file=~/tmux.conf
 fresh tmux/tmux.conf --file=~/tmux.conf
 
-for tmuxinatorconf in "${DOTFILESDIR}"/tmux/*.yml; do
-    fresh tmux/$(basename ${tmuxinatorconf}) --file="$HOME/.config/tmuxinator/$(basename ${tmuxinatorconf})"
-done
+#find "${DOTFILESDIR}/tmux" -name '*.yml' -exec fresh {} --file="$HOME/.config/tmuxinator/{}" ';'
+#for i in "${DOTFILESDIR}"/tmux/*.yml; do
+#  fresh "${i}" --file="${HOME}/.config/tmuxinator/$(basename ${i})"
+#done
+#fresh "${DOTFILESDIR}/tmux/*.yml" --file="${HOME}/.config/tmuxinator/"
 fresh tmux/txc --bin
 
 # Bash

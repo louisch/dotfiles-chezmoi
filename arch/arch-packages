@@ -92,5 +92,5 @@ npm install -g ${NPMPACKAGES[@]}
 PIPPACKAGES=(neovim powerline-status)
 pip install --user ${PIPPACKAGES[@]}
 
-GEMPACKAGES=(tmuxinator)
+GEMPACKAGES=(tmuxinator gist)
 gem install ${GEMPACKAGES[@]}

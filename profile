@@ -1,6 +1,9 @@
 # Path for fresh
 export PATH="${PATH}:${HOME}/bin"
 
+# Editor
+export EDITOR="nvim"
+
 # Android
 case `uname` in
   Darwin)
@@ -30,8 +33,13 @@ export CPPFLAGS="-I/usr/local/opt/ruby/include"
 export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
 
 # MacOS specific
-# test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-export PATH="/opt/local/bin:/opt/local/sbin:${PATH}"
+case `uname` in
+  Darwin)
+    # test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+    export PATH="/opt/local/bin:/opt/local/sbin:${PATH}"
 
-
-export EDITOR="nvim"
+    # Locales
+    export LC_ALL=en_US.UTF-8
+    export LANG=en_US.UTF-8
+    ;;
+esac

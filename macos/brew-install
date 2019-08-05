@@ -1,0 +1,21 @@
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+brew install \
+    ack \
+    cmake \
+    cocoapods \
+    composer \
+    git-flow-avh \
+    git-lfs \
+    go \
+    gradle \
+    neovim \
+    nuget \
+    nvm \
+    python \
+    ruby \
+    rust \
+    tmux \
+    watchman \
+    yarn \
+    zsh

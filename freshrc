@@ -12,6 +12,7 @@ if [[ ! -L "$HOME/.profile" ]]; then
 fi
 fresh profile --file
 fresh profile --file="$HOME/.zprofile"
+fresh profile --file="$HOME/.bash_profile"
 
 # links your local ~/.dotfiles/gitconfig to ~/.gitconfig (you can change your local directory by setting $FRESH_LOCAL)
 if [[ ! -L "$HOME/.gitconfig" ]]; then

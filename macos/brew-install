@@ -19,3 +19,11 @@ brew install \
     watchman \
     yarn \
     zsh
+
+brew tap homebrew/cask-fonts
+
+brew cask install \
+    font-meslo-nerd-font-mono \
+    font-mononoki-nerd-font-mono \
+    iterm2 \
+    react-native-debugger

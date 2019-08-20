@@ -47,8 +47,8 @@ windows:
         - find .
         - gst
   - nvim:
-      root: ~/.config/nvim
+      root: ~/.local/share/chezmoi/dot_config/nvim
       layout: even-horizontal
       panes:
         - find .
-        - gst
+        -

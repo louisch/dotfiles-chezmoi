@@ -1,0 +1,52 @@
+# vim: set ft=sh:
+
+DOTFILESDIR="${HOME}/.dotfiles"
+NEOVIMDIR="${HOME}/.config/nvim"
+
+# handles updating fresh
+fresh freshshell/fresh bin/fresh --bin
+
+if [[ ! -L "$HOME/.profile" ]]; then
+    echo "Existing .profile detected. Backing up as .profile.bak"
+    mv "$HOME/.profile" "$HOME/.profile.bak"
+fi
+fresh profile --file
+fresh profile --file="$HOME/.zprofile"
+fresh profile --file="$HOME/.bash_profile"
+
+# links your local ~/.dotfiles/gitconfig to ~/.gitconfig (you can change your local directory by setting $FRESH_LOCAL)
+if [[ ! -L "$HOME/.gitconfig" ]]; then
+    echo "First time setup detected. Please enter your desired git name/email."
+    read -p "name: " name
+    read -p "email: " email
+    printf "[user]\n    name = ${name}\n    email = ${email}\n" > "${DOTFILESDIR}/gitconfig.local"
+fi
+fresh gitconfig --file
+fresh gitconfig.local --file=~/.gitconfig
+
+fresh Xmodmap --file
+fresh xprofile --file
+
+# TMUX
+# Save history to file
+[[ ! -d "$HOME/.tmux/plugins/tpm" ]] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fresh foobacca/dotfiles tmux/ctrl-a --file=~/tmux.conf
+fresh foobacca/dotfiles tmux/misc-bindings --file=~/tmux.conf
+fresh foobacca/dotfiles tmux/save-buffer-history --file=~/tmux.conf
+fresh foobacca/dotfiles tmux/vi --file=~/tmux.conf
+fresh tmux/tmux.conf --file=~/tmux.conf
+
+#find tmux -name '*.yml' -exec sh -c 'fresh {} --file="${HOME}/.config/tmuxinator/$(basename {})"' ';'
+#for i in "${DOTFILESDIR}"/tmux/*.yml; do
+#  fresh "${i}" --file="${HOME}/.config/tmuxinator/$(basename ${i})"
+#done
+fresh tmux/config.yml --file="${HOME}/.config/tmuxinator/config.yml"
+fresh tmux/local/umsu.yml --file="${HOME}/.config/tmuxinator/umsu.yml"
+fresh tmux/txc --bin
+
+# Bash
+fresh bashrc --file
+
+# zsh
+fresh zsh/zshrc --file=~/.zshrc
+fresh zsh/p10k-lean.zsh --file=~/.config/zsh/p10k-lean.zsh

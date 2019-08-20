@@ -1,0 +1,20 @@
+#!/bin/bash
+if [[ ! $SHELL == *zsh* ]]; then
+  chsh -s /usr/bin/zsh
+fi
+if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
+fi
+if [[ -d "$HOME/.oh-my-zsh" && ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]]; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+fi
+if [[ -d "$HOME/.oh-my-zsh" && ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/k" ]]; then
+  git clone https://github.com/supercrabtree/k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/k
+fi
+if [[ -d "$HOME/.oh-my-zsh" && ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/themes/powerlevel10k" ]]; then
+  git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
+fi
+
+if [[ $(uname) == *"Darwin"* ]]; then
+  curl -L https://iterm2.com/shell_integration/zsh -o ~/.iterm2_shell_integration.zsh
+fi

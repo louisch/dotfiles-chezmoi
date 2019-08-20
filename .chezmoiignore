@@ -1,0 +1,6 @@
+README.md
+working/
+
+{{- if not (contains "bottle" .chezmoi.hostname) }}
+bottle.mo/
+{{- end }}

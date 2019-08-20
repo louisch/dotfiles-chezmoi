@@ -1,4 +1,21 @@
 # dotfiles
 
-Run `FRESH_LOCAL_SOURCE=louisch/dotfiles bash <(curl -sL https://get.freshshell.com)` to download this directory and install fresh.
-Run `git pull && fresh` hereafter to refresh fresh files.
+First, install and initialize chezmoi
+Then, to install these dotfiles, use:
+```
+chezmoi init --apply --verbose https://github.com/louisch/dotfiles.git
+```
+
+Then to update dotfiles from remote, use
+```
+chezmoi update
+```
+
+You can also simply download the files without applying then first,
+see what changes will occur on apply, and only apply once you are
+satisfied with what will happen:
+```
+chezmoi init https://github.com/louisch/dotfiles.git
+chezmoi diff
+chezmoi apply
+```

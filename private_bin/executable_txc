@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-TMUXINATORDIR="${HOME}/.dotfiles/tmuxinator"
+TMUXINATORDIR="${HOME}/.local/share/chezmoi/dot_config/tmuxinator"
 
 
 __ScriptVersion="0.0.1"
@@ -60,5 +60,5 @@ if [[ -z "${EDITOR}" ]]; then
     exit 1
 fi
 
-cp "${TMUXINATORDIR}/default.template.yml" "${TMUXINATORDIR}/$1" &&
+cp "${TMUXINATORDIR}/templates/default.template.yml" "${TMUXINATORDIR}/$1" &&
 eval "${EDITOR}" "${TMUXINATORDIR}/$1"

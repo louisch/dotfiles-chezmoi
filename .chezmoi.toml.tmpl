@@ -1,6 +1,7 @@
 [data]
     name = "{{- promptString "name" -}}"
     email = "{{- promptString "email" -}}"
+    nvimdir = "{{ .chezmoi.homedir }}/.config/nvim"
     zshdir = "{{ .chezmoi.homedir }}/.config/zsh"
 [merge]
     command = "nvim"

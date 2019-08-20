@@ -1,8 +1,7 @@
-{{- $name := promptString "name" -}}
-{{- $email := promptString "email" -}}
 [data]
-    name = "{{ $name }}"
-    email = "{{ $email }}"
+    name = "{{- promptString "name" -}}"
+    email = "{{- promptString "email" -}}"
+    zshdir = "{{ .chezmoi.homedir }}/.config/zsh"
 [merge]
     command = "nvim"
     args = "-d"

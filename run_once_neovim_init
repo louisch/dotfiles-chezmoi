@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# Providers check
+NVIMSHAREDIR="$HOME/.local/share/nvim"
+TEMPCHECKHEALTHFILE=checkhealth.log
+printf "Checking for Python provider...\n"
+nvim -N -u NONE -n -es -c ":checkhealth" -c ":w $TEMPCHECKHEALTHFILE"
+if [[ ! $(cat $TEMPCHECKHEALTHFILE | grep Py) ]]; then
+  printf "Please install Python provider before proceeding\n"
+  rm "$TEMPCHECKHEALTHFILE"
+  exit -1
+fi
+rm "$TEMPCHECKHEALTHFILE"
+printf "Python provider found! Proceeding...\n\n"
+
+printf "Checking for node provider to Neovim...\n"
+if [[ $EUID == 0 ]]; then
+  NPMCMD=( sudo npm )
+else
+  NPMCMD=( npm )
+fi
+if [[ ! $(${NPMCMD[@]} install -g neovim) ]]; then
+  printf "Node provider failed to install. Please install node/npm before proceeding\n"
+  exit -1
+fi
+printf "\n"
+
+
+# vim-plug
+VIMPLUGPACKAGEDIR="$NVIMSHAREDIR/plugged"
+VIMPLUGTARGETFILE="$NVIMSHAREDIR/site/autoload/plug.vim"
+if [[ ! -f "$VIMPLUGTARGETFILE" || ! -d "$VIMPLUGPACKAGEDIR" ]]; then
+  printf "Attempting to install vim-plug to $VIMPLUGTARGETFILE...\n"
+  curl -fLo "$VIMPLUGTARGETFILE" --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  printf "Opening neovim to install plugins...\n"
+  nvim +PlugInstall +qall
+  printf "\n"
+fi
+
+
+# YouCompleteMe
+YCMDIR="$VIMPLUGPACKAGEDIR/YouCompleteMe"
+YCMFLAGS=("clang-completer" "cs-completer" "java-completer" "ts-completer")
+if [[ -d "$YCMDIR" && ! -e "$YCMDIR/install-complete" ]]; then
+  printf "Attmpting to install YouCompleteMe...\n"
+  cwd=$PWD
+  cd "$YCMDIR"
+  python3 install.py "${YCMFLAGS[@]/#/--}" && touch "${YCMDIR}/install-complete"
+  cd "$cwd"
+  printf "\n"
+fi
+
+# Final warnings
+printf "Install complete. Consider using :checkhealth to find further issues\n"

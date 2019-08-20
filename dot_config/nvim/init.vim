@@ -142,6 +142,7 @@ augroup END
 
 "" Source these files when saving them
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
+autocmd BufWritePost $HOME/.local/share/chezmoi/* call system('chezmoi apply')
 
 "" Filetype
 autocmd FileType

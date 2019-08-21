@@ -1,4 +1,3 @@
-runtime plugged.vim
+runtime plugins.vim
 runtime appearance.vim
 runtime behavior.vim
-runtime plugins.vim

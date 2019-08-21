@@ -1,8 +1,13 @@
+{{- $configdir := printf "%s/.config" .chezmoi.homedir -}}
+{{- $datadir := printf "%s/.local/share" .chezmoi.homedir -}}
 [data]
     name = "{{- promptString "name" -}}"
     email = "{{- promptString "email" -}}"
-    nvimdir = "{{ .chezmoi.homedir }}/.config/nvim"
-    zshdir = "{{ .chezmoi.homedir }}/.config/zsh"
+    dir.data = "{{ printf "%s" $datadir }}"
+    dir.config = "{{ printf "%s" $configdir }}"
+    dir.zsh = "{{ printf "%s/zsh" $configdir }}"
+    dir.nvim.main = "{{ printf "%s/nvim" $configdir }}"
+    dir.nvim.plugin = "{{ printf "%s/nvim/plugged" $datadir }}"
 [merge]
     command = "nvim"
     args = "-d"

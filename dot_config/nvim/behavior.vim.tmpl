@@ -13,11 +13,6 @@ syntax enable
 "" Show line and column number
 set ruler
 
-"" Highlight current line
-set cursorline
-autocmd InsertLeave,WinEnter * set cursorline
-autocmd InsertEnter,WinLeave * set nocursorline
-
 "" Omnicompletion
 set omnifunc=syntaxcomplete#Complete
 
@@ -26,7 +21,7 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 
-" Call the function after opening a buffer
+" After opening file, check whether tabs or spaces should be used
 autocmd BufReadPost * call has#TabsOrSpaces()
 
 "" Windows

@@ -5,7 +5,7 @@
     email = "{{- promptString "email" -}}"
     dir.data = "{{ printf "%s" $datadir }}"
     dir.config = "{{ printf "%s" $configdir }}"
-    dir.zsh = "{{ printf "%s/zsh" $configdir }}"
+    dir.zsh = "{{ printf "%s/.zsh" .chezmoi.homedir }}"
     dir.nvim.main = "{{ printf "%s/nvim" $configdir }}"
     dir.nvim.plugin = "{{ printf "%s/nvim/plugged" $datadir }}"
 [merge]

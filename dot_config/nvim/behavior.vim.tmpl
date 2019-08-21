@@ -49,6 +49,11 @@ noremap <Leader>w :Bw<CR>
 noremap <C-t> :tabnew split<CR>
 nnoremap <leader>ds :%s/\s*$//<CR>:nohlsearch<CR>
 nnoremap zz :nohlsearch<CR>
+"" Window navigation
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
 
 "" Prompt to create directory if it does't exist
 augroup vimrc-auto-mkdir

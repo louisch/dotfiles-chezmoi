@@ -30,6 +30,8 @@ nnoremap <leader>nf :NERDTreeFocus<CR>
 nnoremap <leader>nv :NERDTreeVCS<CR>
 
 "" NERDCommenter
+" Auto delete buffer when file has been deleted
+let g:NERDTreeAutoDeleteBuffer = 1
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 " Use compact syntax for prettified multi-line comments

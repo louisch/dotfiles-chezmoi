@@ -1,36 +1,3 @@
-" Neovim Paths
-let nvimdir = "{{ .dir.nvim.main }}"
-
-
-" Plugin installation
-" Specify a directory for plugins
-" - For vim: '~/.vim/plugged'
-" - For Neovim: '~/.local/share/nvim/plugged'
-" - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('{{ .dir.nvim.plugin }}')
-Plug 'bagrat/vim-buffet'
-Plug 'junegunn/vim-easy-align'
-Plug 'mhinz/vim-startify'
-Plug 'ryanoasis/vim-devicons'
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'scrooloose/syntastic'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'ycm-core/YouCompleteMe'
-
-Plug 'itchyny/lightline.vim'
-Plug 'ltlollo/diokai'
-Plug 'altercation/vim-colors-solarized'
-
-Plug 'gregsexton/MatchTag'
-Plug 'sheerun/vim-polyglot'
-call plug#end()
-
-
 " Plugin configuration
 
 "" Fugitive

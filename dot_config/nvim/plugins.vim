@@ -95,4 +95,5 @@ highlight SignifySignDelete cterm=bold ctermbg=234 ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=234 ctermfg=227
 
 "" YouCompleteMe
-nnoremap <leader>f :YcmCompleter FixIt<CR>
+nnoremap <leader>yf :YcmCompleter FixIt<CR>
+let g:ycm_key_detailed_diagnostics = '<leader>yd'

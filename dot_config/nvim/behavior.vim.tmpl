@@ -49,6 +49,8 @@ noremap <S-Tab> :bp<CR>
 noremap <Leader><Tab> :Bw<CR>
 noremap <Leader><S-Tab> :Bw!<CR>
 noremap <C-t> :tabnew split<CR>
+nnoremap <leader>ds :%s/\s*$//<CR>:nohlsearch<CR>
+nnoremap zz :nohlsearch<CR>
 
 "" Prompt to create directory if it does't exist
 augroup vimrc-auto-mkdir
@@ -88,7 +90,6 @@ autocmd BufEnter * :syntax sync minlines=200
 "" incremental search/replace
 set incsearch
 set inccommand=nosplit
-nnoremap zz :nohlsearch<CR>
 
 " Persistent very magic
 nnoremap / /\v

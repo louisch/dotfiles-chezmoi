@@ -4,3 +4,13 @@
 [user]
     name = "{{ .name }}"
     email = "{{ .email }}"
+[merge]
+    tool = nfugitive
+[mergetool "nvimdiff4"]
+    cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED
+[mergetool "nfugitive"]
+    cmd = nvim -f -c "Gdiff" "$MERGED"
+[diff]
+    tool = nvimdiff2
+[difftool "nvimdiff2"]
+    cmd = nvim -d $LOCAL $REMOTE

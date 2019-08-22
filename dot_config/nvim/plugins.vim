@@ -86,12 +86,17 @@ nmap ga <Plug>(EasyAlign)
 "" vim-diminactive
 let g:diminactive_enable_focus = 1
 
-"" vim-signify
-let g:signify_vcs_list = ['git']
-highlight SignColumn ctermbg=234 cterm=NONE guibg=NONE gui=NONE
-highlight SignifySignAdd cterm=bold ctermbg=234 ctermfg=119
-highlight SignifySignDelete cterm=bold ctermbg=234 ctermfg=167
-highlight SignifySignChange cterm=bold ctermbg=234 ctermfg=227
+"" vim-gitgutter
+highlight GitGutterAdd guifg=#859900 guibg=#073642 ctermfg=2 ctermbg=8
+highlight GitGutterChange guifg=#b58900 guibg=#073642 ctermfg=3 ctermbg=8
+highlight GitGutterDelete guifg=#dc322f guibg=#073642 ctermfg=1 ctermbg=8
+highlight GitGutterChangeDelete guifg=#dc322f guibg=#073642 ctermfg=1 ctermbg=8
+let g:gitgutter_sign_added = "+"
+let g:gitgutter_sign_removed = "✂"
+let g:gitgutter_sign_removed_first_line = "✄"
+let g:gitgutter_sign_modified = "✎"
+let g:gitgutter_sign_modified_removed = "✎×"
+let g:gitgutter_grep = 'ack'
 
 "" YouCompleteMe
 nnoremap <leader>yf :YcmCompleter FixIt<CR>

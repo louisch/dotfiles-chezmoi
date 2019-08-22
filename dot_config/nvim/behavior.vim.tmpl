@@ -98,7 +98,10 @@ autocmd BufEnter * :syntax sync minlines=200
 set incsearch
 set inccommand=nosplit
 
-" Persistent very magic
+"" Persistent very magic
 nnoremap / /\v
 vnoremap / /\v
 cnoremap sss s/\v
+
+"" Reduce update time (mainly for gitgutter)
+set updatetime=100

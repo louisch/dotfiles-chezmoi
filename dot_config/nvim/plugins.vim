@@ -17,10 +17,27 @@ nnoremap <leader>gps :Gpush<CR>
 set noshowmode
 set showtabline=2
 let g:lightline = {}
-let g:lightline.colorscheme      = 'solarized'
-let g:lightline.tabline          = {'left': [['buffers']], 'right': []}
+let g:lightline.colorscheme = 'solarized'
+let g:lightline.tabline = {'left': [['buffers']], 'right': []}
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
-let g:lightline.component_type   = {'buffers': 'tabsel'}
+let g:lightline.component_type = {'buffers': 'tabsel'}
+let g:lightline.component_function = {
+\ 'filetype': 'MyFileType',
+\ 'fileformat': 'MyFileFormat',
+\ 'modified': 'MyModified'
+\ }
+
+function! MyFileType()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
+
+function! MyFileFormat()
+  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
+
+function! MyModified()
+  return &modified ? '✎' : &modifiable ? '' : '-'
+endfunction
 
 let g:lightline#bufferline#show_number = 2
 let g:lightline#bufferline#unnamed = '[No Name]'

@@ -29,6 +29,9 @@ set list                " Show problematic characters.
 highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 match ExtraWhitespace /\s\+$\|\t/
 
+"" Highlight merge conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
 "" Highlight current line
 set cursorline
 autocmd InsertLeave,WinEnter * set cursorline

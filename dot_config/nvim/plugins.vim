@@ -102,6 +102,9 @@ nmap <leader>8 <Plug>BuffetSwitch(8)
 nmap <leader>9 <Plug>BuffetSwitch(9)
 nmap <leader>0 <Plug>BuffetSwitch(10)
 
+"" vim-diminactive
+let g:diminactive_enable_focus = 1
+
 "" vim-signify
 let g:signify_vcs_list = ['git']
 highlight SignColumn ctermbg=234 cterm=NONE guibg=NONE gui=NONE

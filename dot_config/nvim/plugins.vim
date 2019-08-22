@@ -76,6 +76,21 @@ let g:buffet_powerline_separators = 1
 let g:buffet_tab_icon = "\uf00a"
 let g:buffet_left_trunc_icon = "\uf0a8"
 let g:buffet_right_trunc_icon = "\uf0a9"
+
+function! g:BuffetSetCustomColors()
+  hi! BuffetCurrentBuffer cterm=NONE ctermbg=2  ctermfg=8 guibg=#d33682 guifg=#073642
+  hi! BuffetActiveBuffer  cterm=NONE ctermbg=10 ctermfg=2 guibg=#2aa198 guifg=#073642
+  hi! BuffetBuffer        cterm=NONE ctermbg=10 ctermfg=8 guibg=#073642 guifg=#93a1a1
+  hi! BuffetTrunc         cterm=bold ctermbg=11 ctermfg=8 guibg=#dc322f guifg=#073642
+  hi! BuffetTab           cterm=NONE ctermbg=4  ctermfg=8 guibg=#268bd2 guifg=#073642
+  hi! link BuffetModCurrentBuffer BuffetCurrentBuffer
+  hi! link BuffetModActiveBuffer  BuffetActiveBuffer
+  hi! link BuffetModBuffer        BuffetBuffer
+  hi! link BuffetLeftTrunc        BuffetTrunc
+  hi! link BuffetRightTrunc       BuffetTrunc
+  hi! link BuffetEnd              BuffetBuffer
+endfunction
+
 nmap <leader>1 <Plug>BuffetSwitch(1)
 nmap <leader>2 <Plug>BuffetSwitch(2)
 nmap <leader>3 <Plug>BuffetSwitch(3)

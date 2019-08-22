@@ -15,14 +15,28 @@ nnoremap <leader>gps :Gpush<CR>
 " As lightline includes mode information, do not show mode information in
 " the last line
 set noshowmode
-" As vim-buffet provides the tabline, disable lightline's tabline
-let g:lightline = {
-  \ 'colorscheme': 'solarized',
-  \ 'enable': {
-  \   'statusline': 1,
-  \   'tabline': 0
-  \ }
-  \ }
+set showtabline=2
+let g:lightline = {}
+let g:lightline.colorscheme      = 'solarized'
+let g:lightline.tabline          = {'left': [['buffers']], 'right': []}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type   = {'buffers': 'tabsel'}
+
+let g:lightline#bufferline#show_number = 2
+let g:lightline#bufferline#unnamed = '[No Name]'
+let g:lightline#bufferline#enable_devicons = 1
+let g:lightline#bufferline#unicode_symbols = 1
+
+nmap <Leader>1 <Plug>lightline#bufferline#go(1)
+nmap <Leader>2 <Plug>lightline#bufferline#go(2)
+nmap <Leader>3 <Plug>lightline#bufferline#go(3)
+nmap <Leader>4 <Plug>lightline#bufferline#go(4)
+nmap <Leader>5 <Plug>lightline#bufferline#go(5)
+nmap <Leader>6 <Plug>lightline#bufferline#go(6)
+nmap <Leader>7 <Plug>lightline#bufferline#go(7)
+nmap <Leader>8 <Plug>lightline#bufferline#go(8)
+nmap <Leader>9 <Plug>lightline#bufferline#go(9)
+nmap <Leader>0 <Plug>lightline#bufferline#go(10)
 
 "" NERDTree
 nnoremap <leader>nn :NERDTreeToggle<CR>
@@ -68,39 +82,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-b>"
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-
-"" vim-buffet
-let g:buffet_always_show_tabline = 1
-let g:buffet_show_index = 1
-let g:buffet_powerline_separators = 1
-let g:buffet_tab_icon = "\uf00a"
-let g:buffet_left_trunc_icon = "\uf0a8"
-let g:buffet_right_trunc_icon = "\uf0a9"
-
-function! g:BuffetSetCustomColors()
-  hi! BuffetCurrentBuffer cterm=NONE ctermbg=2  ctermfg=8 guibg=#d33682 guifg=#073642
-  hi! BuffetActiveBuffer  cterm=NONE ctermbg=10 ctermfg=2 guibg=#2aa198 guifg=#073642
-  hi! BuffetBuffer        cterm=NONE ctermbg=10 ctermfg=8 guibg=#073642 guifg=#93a1a1
-  hi! BuffetTrunc         cterm=bold ctermbg=11 ctermfg=8 guibg=#dc322f guifg=#073642
-  hi! BuffetTab           cterm=NONE ctermbg=4  ctermfg=8 guibg=#268bd2 guifg=#073642
-  hi! link BuffetModCurrentBuffer BuffetCurrentBuffer
-  hi! link BuffetModActiveBuffer  BuffetActiveBuffer
-  hi! link BuffetModBuffer        BuffetBuffer
-  hi! link BuffetLeftTrunc        BuffetTrunc
-  hi! link BuffetRightTrunc       BuffetTrunc
-  hi! link BuffetEnd              BuffetBuffer
-endfunction
-
-nmap <leader>1 <Plug>BuffetSwitch(1)
-nmap <leader>2 <Plug>BuffetSwitch(2)
-nmap <leader>3 <Plug>BuffetSwitch(3)
-nmap <leader>4 <Plug>BuffetSwitch(4)
-nmap <leader>5 <Plug>BuffetSwitch(5)
-nmap <leader>6 <Plug>BuffetSwitch(6)
-nmap <leader>7 <Plug>BuffetSwitch(7)
-nmap <leader>8 <Plug>BuffetSwitch(8)
-nmap <leader>9 <Plug>BuffetSwitch(9)
-nmap <leader>0 <Plug>BuffetSwitch(10)
 
 "" vim-diminactive
 let g:diminactive_enable_focus = 1

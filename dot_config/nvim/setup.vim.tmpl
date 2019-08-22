@@ -8,7 +8,6 @@ let nvimdir = "{{ .dir.nvim.main }}"
 " - For Neovim: '~/.local/share/nvim/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('{{ .dir.nvim.plugin }}')
-Plug 'bagrat/vim-buffet'
 Plug 'junegunn/vim-easy-align'
 Plug 'mhinz/vim-signify'
 Plug 'mhinz/vim-startify'
@@ -27,7 +26,7 @@ Plug 'ycm-core/YouCompleteMe'
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'blueyed/vim-diminactive'
-Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim' | Plug 'mengelbrecht/lightline-bufferline'
 Plug 'iCyMind/NeoSolarized'
 Plug 'ltlollo/diokai'
 

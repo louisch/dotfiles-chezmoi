@@ -1,6 +1,9 @@
 " Appearance
 " set background=light
-if has#colorscheme('diokai')
+if has#colorscheme('NeoSolarized')
+  set termguicolors
+  color NeoSolarized
+elseif has#colorscheme('diokai')
   color diokai
 elseif has#colorscheme('desert')
   color desert
@@ -9,6 +12,10 @@ endif
 if $TERM == "linux"
   set guicursor=
 endif
+
+" tmux truecolor hack [https://github.com/icymind/NeoSolarized]
+set t_8f=^[[38;2;%lu;%lu;%lum
+set t_8b=^[[48;2;%lu;%lu;%lum
 
 "" Line numbers
 set number

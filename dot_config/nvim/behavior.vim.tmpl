@@ -88,9 +88,10 @@ autocmd FileType
        \yaml
       \ setlocal shiftwidth=2 tabstop=2
 autocmd FileType css,scss setlocal omnifunc=csscomplete#CompleteCSS
-
+" filetypes for chezmoi templates
 autocmd BufNewFile,BufRead *.vim.tmpl set filetype=vim
 autocmd BufNewFile,BufRead *.bash.tmpl set filetype=sh
+autocmd BufNewFile,BufRead *zshrc.tmpl set filetype=sh
 
 "" Minimum amount of lines syntax will look backwards to
 autocmd BufEnter * :syntax sync minlines=200

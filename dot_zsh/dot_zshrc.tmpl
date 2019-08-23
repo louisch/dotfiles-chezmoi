@@ -1,5 +1,3 @@
-# vim: filetype=sh
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -69,7 +67,7 @@ ZSH_DISABLE_COMPFIX=true
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(adb colored-man-pages colorize command-not-found git git-flow k history-substring-search tmuxinator zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(adb colored-man-pages colorize command-not-found git git-flow history-substring-search tmuxinator zsh-autosuggestions zsh-syntax-highlighting)
 
 source "${ZSH}/oh-my-zsh.sh"
 
@@ -112,11 +110,9 @@ alias open="xdg-open"
 alias tx="tmuxinator"
 alias whatismyip="curl https://ipinfo.io/ip"
 alias myip="whatismyip"
-alias k="k -h --no-vcs"
-alias ka="k -hA --no-vcs"
-alias l="k -h --no-vcs"
-alias la="k -hA --no-vcs"
-alias ll="k -hA --no-vcs"
+alias ls="exa"
+alias la="exa -la"
+alias l="exa -lh --git"
 
 
 # Bindings

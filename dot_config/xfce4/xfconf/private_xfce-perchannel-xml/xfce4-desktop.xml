@@ -34,12 +34,31 @@
         <property name="workspace0" type="empty">
           <property name="color-style" type="int" value="0"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/xfce/xfce-teal.jpg"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/xfce/xfce-blue.jpg"/>
+          <property name="rgba1" type="array">
+            <value type="double" value="0.027451"/>
+            <value type="double" value="0.211765"/>
+            <value type="double" value="0.258824"/>
+            <value type="double" value="1.000000"/>
+          </property>
+          <property name="backdrop-cycle-enable" type="bool" value="false"/>
         </property>
         <property name="workspace1" type="empty">
-          <property name="color-style" type="int" value="0"/>
-          <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/xfce/xfce-teal.jpg"/>
+          <property name="color-style" type="int" value="2"/>
+          <property name="image-style" type="int" value="0"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/xfce/xfce-blue.jpg"/>
+          <property name="rgba1" type="array">
+            <value type="double" value="0.131200"/>
+            <value type="double" value="0.230568"/>
+            <value type="double" value="0.320000"/>
+            <value type="double" value="1.000000"/>
+          </property>
+          <property name="rgba2" type="array">
+            <value type="double" value="0.027451"/>
+            <value type="double" value="0.211765"/>
+            <value type="double" value="0.258824"/>
+            <value type="double" value="1.000000"/>
+          </property>
         </property>
         <property name="workspace2" type="empty">
           <property name="color-style" type="int" value="0"/>
@@ -85,10 +104,12 @@
         </property>
       </property>
     </property>
+    <property name="single-workspace-mode" type="bool" value="true"/>
+    <property name="single-workspace-number" type="int" value="1"/>
   </property>
   <property name="last" type="empty">
-    <property name="window-width" type="int" value="705"/>
-    <property name="window-height" type="int" value="665"/>
+    <property name="window-width" type="int" value="756"/>
+    <property name="window-height" type="int" value="695"/>
   </property>
   <property name="desktop-icons" type="empty">
     <property name="tooltip-size" type="double" value="124.000000"/>

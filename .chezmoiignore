@@ -4,3 +4,7 @@ working/
 {{- if not (contains "bottle" .chezmoi.hostname) }}
 bottle.mo/
 {{- end }}
+
+{{- if not (eq "Arch Linux" .chezmoi.osRelease.name) }}
+*arch_linux*
+{{- end }}

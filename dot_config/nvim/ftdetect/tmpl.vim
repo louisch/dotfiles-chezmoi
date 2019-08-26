@@ -1,4 +1,4 @@
-function SetFTBasedOnContents()
+function! SetFTBasedOnContents()
   if getline(1) =~ '^#!.*[s]\?bin/sh\>' ||
    \ getline(1) =~ '^#!.*[s]\?bin/bash\>' ||
    \ getline(1) =~ '^#!.*\s\+\(ba\|c\|a\|da\|k\|pdk\|mk\|tc\)\?sh\>' ||

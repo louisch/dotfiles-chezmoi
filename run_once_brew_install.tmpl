@@ -1,3 +1,4 @@
+{{ if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
 
 if ! hash brew; then
@@ -32,3 +33,4 @@ brew cask install \
     font-mononoki-nerd-font-mono \
     iterm2 \
     react-native-debugger
+{{ end -}}

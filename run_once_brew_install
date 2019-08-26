@@ -1,10 +1,15 @@
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+#!/bin/bash
+
+if ! hash brew; then
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
 
 brew install \
     ack \
     cmake \
     cocoapods \
     composer \
+    exa \
     git-flow-avh \
     git-lfs \
     go \
@@ -20,7 +25,7 @@ brew install \
     yarn \
     zsh
 
-brew tap homebrew/cask-fonts
+brew tap -q homebrew/cask-fonts
 
 brew cask install \
     font-meslo-nerd-font-mono \

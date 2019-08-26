@@ -44,11 +44,11 @@ windows:
       # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
       # synchronize: after
       panes:
-        - find .
+        - ls -T
         - gst
   - nvim:
       root: ~/.local/share/chezmoi/dot_config/nvim
       layout: even-horizontal
       panes:
-        - find .
+        - ls -T
         -

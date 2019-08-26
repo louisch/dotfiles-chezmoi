@@ -15,3 +15,7 @@ bottle.mo/
         {{- end }}
     {{- end }}
 {{- end }}
+
+{{- if ne .chezmoi.os "darwin" }}
+.config/iterm2/
+{{- end }}

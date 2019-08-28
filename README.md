@@ -8,7 +8,7 @@ Then run one of the following (HTTPS or SSH) to install these dotfiles:
 chezmoi init --apply --verbose https://github.com/louisch/dotfiles.git
 ```
 ```
-chezmoi init --apply --verbose git@github.com/louisch/dotfiles.git
+chezmoi init --apply --verbose git@github.com:louisch/dotfiles.git
 ```
 
 Then to update dotfiles from remote, use

@@ -78,7 +78,6 @@ ALLPACKAGES=("${AURPACKAGES[@]}" "${PACMANPACKAGES[@]}")
 
 for package in "${ALLPACKAGES[@]}"; do
   if [[ ! $("${PACMANQUERYCMD[@]}" "$package") ]]; then
-    echo "$package"
     continue_install=0
   fi
 done

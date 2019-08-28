@@ -81,7 +81,7 @@
     </property>
     <property name="plugin-4" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="mpris-players" type="string" value="chrome.instance1343;chrome.instance1346;chrome.instance1383;chrome.instance1393;chrome.instance1460;chrome.instance1526;chrome.instance15288;chrome.instance2006;chrome.instance2118;chrome.instance2602;chrome.instance3046;chrome.instance4164;chrome.instance4891;chrome.instance5377;chrome.instance6680;chrome.instance7597;spotify"/>
+      <property name="mpris-players" type="string" value="chrome.instance1343;chrome.instance1346;chrome.instance1383;chrome.instance1393;chrome.instance1460;chrome.instance1526;chrome.instance15288;chrome.instance2006;chrome.instance2056;chrome.instance2118;chrome.instance2602;chrome.instance3046;chrome.instance4164;chrome.instance4891;chrome.instance5377;chrome.instance6680;chrome.instance7597;spotify"/>
     </property>
     <property name="plugin-7" type="string" value="xfce4-sensors-plugin"/>
   </property>

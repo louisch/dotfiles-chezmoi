@@ -8,11 +8,14 @@ bottle.mo/
 {{- if not (index .chezmoi "osRelease") }}
 *arch_linux*
 .SynologyDrive/SynologyDrive.app/conf/
+.config/xfce4/
 {{- end }}
 {{- if index .chezmoi "osRelease" }}
     {{- if index .chezmoi "osRelease" "name" }}
         {{- if not (eq "Arch Linux" .chezmoi.osRelease.name) -}}
             *arch_linux*
+            .SynologyDrive/SynologyDrive.app/conf/
+            .config/xfce4/
         {{- end }}
     {{- end }}
 {{- end }}

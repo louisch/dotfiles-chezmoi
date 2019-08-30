@@ -9,6 +9,7 @@ bottle.mo/
 *arch_linux*
 .SynologyDrive/SynologyDrive.app/conf/
 .config/xfce4/
+bin/cpxfce
 {{- end }}
 {{- if index .chezmoi "osRelease" }}
     {{- if index .chezmoi "osRelease" "name" }}
@@ -16,6 +17,7 @@ bottle.mo/
             *arch_linux*
             .SynologyDrive/SynologyDrive.app/conf/
             .config/xfce4/
+            bin/cpxfce
         {{- end }}
     {{- end }}
 {{- end }}

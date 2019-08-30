@@ -14,11 +14,27 @@ PACMANUPDATECMD=( "${PACMANCMD[@]}" -Syuq --noconfirm )
 PACMANLOCALINSTALLCMD=( "${PACMANCMD[@]}" -Uq --noconfirm )
 
 YAYCMD=( yay )
-YAYINSTALLCMD=( "${YAYCMD[@]}" -Sq --needed --noconfirm)
+YAYINSTALLCMD=( "${YAYCMD[@]}" -Sq --needed --noconfirm )
 YAYUPDATECMD=( "${YAYCMD[@]}" -Syuaq --noconfirm )
 
 SYSTEMCTLENABLECMD=( "${SYSTEMCTLCMD[@]}" -q enable )
 SYSTEMCTLSTARTCMD=( "${SYSTEMCTLCMD[@]}" -q start )
+
+NODEVERSION="lts/dubnium"
+NPMCMD=( npm )
+NPMINSTALLCMD=( "${NPMCMD[@]}" install -g )
+NPMLOCALFINDCMD=( "${NPMCMD[@]}" ls -g )
+
+PIPCMD=( pip )
+PIPINSTALLCMD=( "${PIPCMD[@]}" install )
+function pip_local_find {
+  "${PIPCMD[@]}" list | ack "$1"
+}
+
+
+GEMCMD=( gem )
+GEMINSTALLCMD=( "${GEMCMD[@]}" install )
+GEMLOCALFINDCMD=( "${GEMCMD[@]}" list -lie )
 
 
 # TODO: move setup code into another script
@@ -74,57 +90,124 @@ AURWORK=()
 {{- end }}
 AURPACKAGES=("${AURDEV[@]}" "${AURINTERNET[@]}" "${AURENTERTAINMENT[@]}" "${AUROTHERS[@]}" "${AURWORK[@]}")
 PACMANPACKAGES=("${DEV[@]}" "${GNOME[@]}" "${GNOMEEXTRA[@]}" "${XFCE[@]}" "${XFCESUPPLEMENT[@]}" "${INPUTMETHOD[@]}" "${NETWORK[@]}" "${DESKTOPAPPS[@]}" "${THEMING[@]}" "${OTHERS[@]}")
-ALLPACKAGES=("${AURPACKAGES[@]}" "${PACMANPACKAGES[@]}")
 
-for package in "${ALLPACKAGES[@]}"; do
-  if [[ ! $("${PACMANQUERYCMD[@]}" "$package") ]]; then
-    continue_install=0
+NPMPACKAGES=(expo-cli react-native-cli neovim)
+PIPPACKAGES=(neovim powerline-status)
+GEMPACKAGES=(tmuxinator gist)
+
+PACMANMANAGEDPACKAGES=("${AURPACKAGES[@]}" "${PACMANPACKAGES[@]}")
+
+function try_install_pacman_packages {
+  local install_pacman_packages=$(false)
+  for package in "${PACMANMANAGEDPACKAGES[@]}"; do
+    if [[ ! $("${PACMANQUERYCMD[@]}" "$package") ]]; then
+      install_pacman_packages=$(true)
+    fi
+  done
+
+  if [[ ! "$install_pacman_packages" ]]; then
+    echo "All pacman packages installed already."
+    return
+  else
+    echo "Pacman packages missing. Continuing install."
   fi
-done
 
-if [[ ! "$continue_install" ]]; then
-  echo "All packages installed already."
-  exit
-else
-  echo "Packages needed. Continuing install."
-fi
+  # Install packages from official repositories
 
-# Install packages from official repositories
+  "${PACMANUPDATECMD[@]}"
+  "${PACMANINSTALLCMD[@]}" ${PACMANPACKAGES[@]}
 
-"${PACMANUPDATECMD[@]}"
-"${PACMANINSTALLCMD[@]}" ${PACMANPACKAGES[@]}
+  # Install packages from AUR
+  if [ ! -x /usr/bin/yay ]; then
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    makepkg -si
+    "${PACMANLOCALINSTALLCMD[@]}" yay*.pkg.xz
+    cd ..
+    rm -rf yay
+  fi
 
-# Install packages from AUR
-if [ ! -x /usr/bin/yay ]; then
-  git clone https://aur.archlinux.org/yay.git
-  cd yay
-  makepkg -si
-  "${PACMANLOCALINSTALLCMD[@]}" yay*.pkg.xz
-  cd ..
-  rm -rf yay
-fi
-
-"${YAYUPDATECMD[@]}"
-"${YAYINSTALLCMD[@]}" ${AURPACKAGES[@]}
+  "${YAYUPDATECMD[@]}"
+  "${YAYINSTALLCMD[@]}" ${AURPACKAGES[@]}
 
 
-{{- if contains "bott" .chezmoi.hostname }}
-if ! pacman -Qqs "chat"; then
-  chatname='Chat_1.0.1-40_amd64.deb'
-  chaturl="https://global.download.synology.com/download/Tools/ChatClient/1.0.1-40/Ubuntu/x86_64/Chat_1.0.1-40_amd64.deb?model=DS1517&bays=5&dsm_version=6.2.2&build_number=24922"
-  curl "${chaturl}" > "${chatname}"
-  debtap "${chatname}"
-fi
-{{- end }}
+  {{- if contains "bott" .chezmoi.hostname }}
+  if ! pacman -Qqs "chat"; then
+    chatname='Chat_1.0.1-40_amd64.deb'
+    chaturl="https://global.download.synology.com/download/Tools/ChatClient/1.0.1-40/Ubuntu/x86_64/Chat_1.0.1-40_amd64.deb?model=DS1517&bays=5&dsm_version=6.2.2&build_number=24922"
+    curl "${chaturl}" > "${chatname}"
+    debtap "${chatname}"
+  fi
+  {{- end }}
+
+}
 
 
 # External non-arch packages
 
-NPMPACKAGES=(expo-cli react-native-cli neovim)
-npm install -g ${NPMPACKAGES[@]}
+function try_install_npm_packages {
+  if [[ ! $(type "${NPMCMD[@]}") ]]; then
+    nvm install "${NODEVERSION}"
+    nvm use "${NODEVERSION}"
+  fi
 
-PIPPACKAGES=(neovim powerline-status)
-pip install --user ${PIPPACKAGES[@]}
+  local install_npm_packages=$(false)
+  for package in "${NPMPACKAGES[@]}"; do
+    if [[ ! $("${NPMLOCALFINDCMD[@]}" "$package") ]]; then
+      install_npm_packages=$(true)
+    fi
+  done
 
-GEMPACKAGES=(tmuxinator gist)
-gem install ${GEMPACKAGES[@]}
+  if [[ ! "$install_npm_packages" ]]; then
+    echo "All npm packages already installed."
+    return
+  else
+    echo "npm packages missing. Continuing install."
+  fi
+
+  "${NPMINSTALLCMD[@]}" ${NPMPACKAGES[@]}
+}
+
+function try_install_pip_packages {
+  local install_pip_packages=$(false)
+  for package in "${PIPPACKAGES[@]}"; do
+    if [[ ! $(pip_local_find "$package") ]]; then
+      install_pip_packages=$(true)
+    fi
+  done
+
+  if [[ ! "$install_pip_packages" ]]; then
+    echo "All pip packages already installed."
+    return
+  else
+    echo "$package missing"
+    echo "Pip packages missing. Continuing install."
+  fi
+
+  "${PIPINSTALLCMD[@]}" ${PIPPACKAGES[@]}
+}
+
+function try_install_gems {
+  local install_gems=$(false)
+  for package in "${GEMS[@]}"; do
+    if [[ ! $("${GEMLOCALFINDCMD[@]}" "$package") ]]; then
+      install_gems=$(true)
+    fi
+  done
+
+  if [[ ! "$install_gems" ]]; then
+    echo "All gems already installed."
+    return
+  else
+    echo "Gems missing. Continuing install."
+  fi
+
+  "${GEMINSTALLCMD[@]}" ${GEMS[@]}
+}
+
+
+try_install_pacman_packages
+try_install_npm_packages
+try_install_pip_packages
+try_install_gems
+

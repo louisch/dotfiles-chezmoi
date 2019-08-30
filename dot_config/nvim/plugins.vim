@@ -1,5 +1,8 @@
 " Plugin configuration
 
+"" Devdocs
+nmap K <Plug>(devdocs-under-cursor)
+
 "" Fugitive
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gb :Gblame<CR>

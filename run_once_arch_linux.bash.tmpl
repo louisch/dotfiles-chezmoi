@@ -98,14 +98,14 @@ GEMPACKAGES=(tmuxinator gist)
 PACMANMANAGEDPACKAGES=("${AURPACKAGES[@]}" "${PACMANPACKAGES[@]}")
 
 function try_install_pacman_packages {
-  local install_pacman_packages=$(false)
+  local install_pacman_packages=false
   for package in "${PACMANMANAGEDPACKAGES[@]}"; do
     if [[ ! $("${PACMANQUERYCMD[@]}" "$package") ]]; then
-      install_pacman_packages=$(true)
+      install_pacman_packages=true
     fi
   done
 
-  if [[ ! "$install_pacman_packages" ]]; then
+  if [[ "$install_pacman_packages" = false ]]; then
     echo "All pacman packages installed already."
     return
   else
@@ -151,14 +151,14 @@ function try_install_npm_packages {
     nvm use "${NODEVERSION}"
   fi
 
-  local install_npm_packages=$(false)
+  local install_npm_packages=false
   for package in "${NPMPACKAGES[@]}"; do
     if [[ ! $("${NPMLOCALFINDCMD[@]}" "$package") ]]; then
-      install_npm_packages=$(true)
+      install_npm_packages=true
     fi
   done
 
-  if [[ ! "$install_npm_packages" ]]; then
+  if [[ "$install_npm_packages" = false ]]; then
     echo "All npm packages already installed."
     return
   else
@@ -169,14 +169,14 @@ function try_install_npm_packages {
 }
 
 function try_install_pip_packages {
-  local install_pip_packages=$(false)
+  local install_pip_packages=false
   for package in "${PIPPACKAGES[@]}"; do
     if [[ ! $(pip_local_find "$package") ]]; then
-      install_pip_packages=$(true)
+      install_pip_packages=true
     fi
   done
 
-  if [[ ! "$install_pip_packages" ]]; then
+  if [[ "$install_pip_packages" = false ]]; then
     echo "All pip packages already installed."
     return
   else
@@ -188,14 +188,14 @@ function try_install_pip_packages {
 }
 
 function try_install_gems {
-  local install_gems=$(false)
+  local install_gems=false
   for package in "${GEMS[@]}"; do
     if [[ ! $("${GEMLOCALFINDCMD[@]}" "$package") ]]; then
-      install_gems=$(true)
+      install_gems=true
     fi
   done
 
-  if [[ ! "$install_gems" ]]; then
+  if [[ "$install_gems" = false ]]; then
     echo "All gems already installed."
     return
   else

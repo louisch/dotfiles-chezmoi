@@ -1,6 +1,7 @@
 [core]
     editor = nvim
     autocrlf = input
+    excludesfile = "{{ .chezmoi.homedir }}/.gitignore_global"
 [user]
     name = "{{ .name }}"
     email = "{{ .email }}"

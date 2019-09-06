@@ -45,6 +45,7 @@
         <value type="string" value="cloud-drive-ui"/>
       </property>
       <property name="names-ordered" type="array">
+        <value type="string" value="obs"/>
         <value type="string" value="bluetooth"/>
         <value type="string" value="unityhub"/>
         <value type="string" value="cloud-drive-ui"/>

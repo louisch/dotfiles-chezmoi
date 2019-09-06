@@ -22,6 +22,9 @@ export PATH="${PATH}:${ANDROID_HOME}/platform-tools"
 export PATH="${HOME}/.node_modules/bin:${PATH}"
 export PATH="${PATH}:${HOME}/.yarn/bin"
 
+# PHP
+export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+
 # Python
 export PATH="${PATH}:${HOME}/.local/bin"
 case `uname` in

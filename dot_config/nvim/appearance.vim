@@ -1,8 +1,12 @@
 " Appearance
 " set background=light
-if has#colorscheme('NeoSolarized')
-  set termguicolors
-  color NeoSolarized
+set termguicolors
+if has#colorscheme('hybrid_material')
+  color hybrid_material
+elseif has#colorscheme('solarized8')
+  color solarized8
+elseif has#colorscheme('gruvbox')
+  color gruvbox
 elseif has#colorscheme('diokai')
   color diokai
 elseif has#colorscheme('desert')

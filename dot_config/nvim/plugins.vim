@@ -20,7 +20,11 @@ nnoremap <leader>gps :Gpush<CR>
 set noshowmode
 set showtabline=2
 let g:lightline = {}
-let g:lightline.colorscheme = 'solarized'
+if has#colorscheme('hybrid_material')
+  let g:lightline.colorscheme = 'hybrid'
+else
+  let g:lightline.colorscheme = 'solarized'
+endif
 let g:lightline.tabline = {'left': [['buffers']], 'right': []}
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type = {'buffers': 'tabsel'}
@@ -107,10 +111,6 @@ nmap ga <Plug>(EasyAlign)
 let g:diminactive_enable_focus = 1
 
 "" vim-gitgutter
-highlight GitGutterAdd guifg=#859900 guibg=#073642 ctermfg=2 ctermbg=8
-highlight GitGutterChange guifg=#b58900 guibg=#073642 ctermfg=3 ctermbg=8
-highlight GitGutterDelete guifg=#dc322f guibg=#073642 ctermfg=1 ctermbg=8
-highlight GitGutterChangeDelete guifg=#dc322f guibg=#073642 ctermfg=1 ctermbg=8
 let g:gitgutter_sign_added = "+"
 let g:gitgutter_sign_removed = "✂"
 let g:gitgutter_sign_removed_first_line = "✄"

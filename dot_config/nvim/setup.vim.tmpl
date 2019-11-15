@@ -9,14 +9,15 @@ let nvimdir = "{{ .dir.nvim.main }}"
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('{{ .dir.nvim.plugin }}')
 Plug 'airblade/vim-gitgutter'
+Plug 'dense-analysis/ale'
 Plug 'junegunn/vim-easy-align'
 Plug 'machakann/vim-swap'
 Plug 'mhinz/vim-startify'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'rhysd/devdocs.vim'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'ryanoasis/vim-devicons'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'dense-analysis/ale'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-abolish'

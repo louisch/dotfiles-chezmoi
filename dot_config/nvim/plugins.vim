@@ -88,7 +88,9 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 
 "" Ale
-let g:ale_linters = { 'javascript': ['stylelint', 'eslint'] }
+let g:ale_linters_explicit = 1
+let g:ale_linters = { 'javascript': ['stylelint', 'flow-language-server', 'eslint'] }
+let g:ale_linters_ignore = { 'javascript': ['tsserver'] }
 let g:ale_fixers = {
 \  '*': ['remove_trailing_lines', 'trim_whitespace'],
 \  'javascript': ['prettier', 'eslint']
